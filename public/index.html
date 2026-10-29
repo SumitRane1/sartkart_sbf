@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SmartCart</title>
+<title>SBF SmartCart</title>
 
 <style>
 *{
@@ -91,7 +91,10 @@ main{
     margin-bottom:20px;
 }
 
-/* SCANNER */
+
+/* =====================================================
+   SCANNER
+===================================================== */
 
 .scanner-card{
     background:#fff;
@@ -158,7 +161,10 @@ main{
     cursor:not-allowed;
 }
 
-/* PRODUCT */
+
+/* =====================================================
+   PRODUCT
+===================================================== */
 
 .product-card{
     margin-top:16px;
@@ -188,7 +194,10 @@ main{
     color:#111;
 }
 
-/* CART */
+
+/* =====================================================
+   CART
+===================================================== */
 
 .cart-item{
     background:#fff;
@@ -274,7 +283,10 @@ main{
     color:#777;
 }
 
-/* CHECKOUT */
+
+/* =====================================================
+   CHECKOUT
+===================================================== */
 
 .form-card h3{
     margin:0 0 13px;
@@ -322,7 +334,10 @@ main{
     font-size:13px;
 }
 
-/* WEIGHT VERIFICATION */
+
+/* =====================================================
+   WEIGHT VERIFICATION
+===================================================== */
 
 .weight-card{
     background:#fff;
@@ -338,19 +353,8 @@ main{
     margin-bottom:12px;
 }
 
-.weight-row{
-    display:flex;
-    justify-content:space-between;
-    margin:8px 0;
-    color:#555;
-}
-
-.weight-row strong{
-    color:#111;
-}
-
 .weight-status{
-    margin-top:14px;
+    margin-top:0;
     padding:13px;
     border-radius:11px;
     font-weight:700;
@@ -388,7 +392,10 @@ main{
     display:none;
 }
 
-/* PAYMENT LOCK */
+
+/* =====================================================
+   PAYMENT LOCK
+===================================================== */
 
 .payment-locked{
     opacity:.5;
@@ -399,7 +406,10 @@ main{
     cursor:not-allowed;
 }
 
-/* BILL */
+
+/* =====================================================
+   BILL
+===================================================== */
 
 .success-card{
     background:#fff;
@@ -471,6 +481,11 @@ main{
     color:#111;
 }
 
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
 @media(max-width:420px){
 
     main{
@@ -490,7 +505,13 @@ main{
         padding:12px;
         gap:8px;
     }
+
 }
+
+
+/* =====================================================
+   PRINT
+===================================================== */
 
 @media print{
 
@@ -519,24 +540,29 @@ main{
     .success-card{
         box-shadow:none;
     }
+
 }
 
 </style>
 </head>
 
+
 <body>
+
 
 <header>
 
     <div class="logo">
-        SmartCart
+        SBF SmartCart
     </div>
+
 
     <button
         class="cart-button"
         onclick="showScreen('cart')"
         aria-label="Open cart"
     >
+
         🛒
 
         <span
@@ -552,6 +578,7 @@ main{
 
 
 <main>
+
 
 <!-- =====================================================
      SCAN SCREEN
@@ -626,19 +653,6 @@ main{
 
             <strong>
                 ₹<span id="productPrice"></span>
-            </strong>
-
-        </div>
-
-
-        <div class="product-info">
-
-            <span>
-                Weight
-            </span>
-
-            <strong>
-                <span id="productWeight"></span> g
             </strong>
 
         </div>
@@ -764,7 +778,7 @@ main{
     </div>
 
 
-    <!-- CUSTOMER -->
+    <!-- CUSTOMER DETAILS -->
 
     <div class="form-card">
 
@@ -820,52 +834,13 @@ main{
 
 
     <!-- =================================================
-         WEIGHT VERIFICATION
+         CART VERIFICATION
     ================================================== -->
 
     <div class="weight-card">
 
         <div class="weight-title">
-            Cart Weight Verification
-        </div>
-
-
-        <div class="weight-row">
-
-            <span>
-                Expected weight
-            </span>
-
-            <strong>
-                <span id="expectedWeight">0</span> g
-            </strong>
-
-        </div>
-
-
-        <div class="weight-row">
-
-            <span>
-                Actual weight
-            </span>
-
-            <strong>
-                <span id="actualWeight">--</span> g
-            </strong>
-
-        </div>
-
-
-        <div class="weight-row">
-
-            <span>
-                Allowed tolerance
-            </span>
-
-            <strong>
-                +50 g
-            </strong>
-
+            Cart Verification
         </div>
 
 
@@ -873,7 +848,7 @@ main{
             class="weight-status checking"
             id="weightStatus"
         >
-            Checking cart weight...
+            🔄 Verifying your cart...
         </div>
 
 
@@ -978,13 +953,11 @@ main{
         </label>
 
 
-        <!-- WEIGHT WARNING DIRECTLY ABOVE BUTTON -->
-
         <div
             class="weight-status checking"
             id="paymentWeightStatus"
         >
-            🔒 Waiting for weight verification...
+            🔒 Cart verification in progress...
         </div>
 
 
@@ -1024,14 +997,14 @@ main{
 
 
         <p>
-            Thank you for shopping with SmartCart.
+            Thank you for shopping with SBF SmartCart.
         </p>
 
 
         <div class="bill">
 
             <strong>
-                SmartCart
+                SBF SmartCart
             </strong>
 
 
@@ -1098,6 +1071,7 @@ main{
     </div>
 
 </section>
+
 
 </main>
 
@@ -1219,6 +1193,7 @@ async function startScanner(){
                 codeReader.reset();
 
             }
+
             catch(e){}
 
         }
@@ -1276,6 +1251,7 @@ async function startScanner(){
                     codeReader.reset();
 
                 }
+
                 catch(e){}
 
 
@@ -1365,12 +1341,6 @@ async function getProduct(barcode){
             "productPrice"
         ).innerText =
             data.price;
-
-
-        document.getElementById(
-            "productWeight"
-        ).innerText =
-            data.weight;
 
 
         document.getElementById(
@@ -1840,14 +1810,12 @@ function updateCheckoutUI(){
     ).innerText =
         totals.total;
 
-
-    calculateExpectedWeight();
-
 }
 
 
 /* =====================================================
-   EXPECTED WEIGHT
+   CALCULATE EXPECTED WEIGHT
+   INTERNAL ONLY
 ===================================================== */
 
 function calculateExpectedWeight(){
@@ -1864,12 +1832,6 @@ function calculateExpectedWeight(){
     });
 
 
-    document.getElementById(
-        "expectedWeight"
-    ).innerText =
-        expected;
-
-
     return expected;
 
 }
@@ -1881,10 +1843,6 @@ function calculateExpectedWeight(){
 
 function startWeightVerification(){
 
-    /*
-       Always stop an old timer first.
-    */
-
     if(weightTimer){
 
         clearInterval(weightTimer);
@@ -1894,10 +1852,6 @@ function startWeightVerification(){
     }
 
 
-    /*
-       Payment must start locked.
-    */
-
     weightVerified = false;
 
     paymentProcessing = false;
@@ -1906,25 +1860,18 @@ function startWeightVerification(){
     setPaymentLocked(true);
 
 
-    /*
-       Show checking state.
-    */
-
     setWeightStatus(
         "checking",
-        "🔄 Checking cart weight..."
+        "🔄 Verifying your cart..."
     );
 
-
-    /*
-       Check immediately.
-    */
 
     checkWeight();
 
 
     /*
        Continue checking every 1.5 seconds.
+       This remains active until payment succeeds.
     */
 
     weightTimer =
@@ -1938,6 +1885,7 @@ function startWeightVerification(){
 
 /* =====================================================
    CHECK WEIGHT
+   CUSTOMER DOES NOT SEE THE NUMBERS
 ===================================================== */
 
 async function checkWeight(){
@@ -1948,6 +1896,10 @@ async function checkWeight(){
 
     }
 
+
+    /*
+       Weight calculation happens internally.
+    */
 
     const expectedWeight =
         calculateExpectedWeight();
@@ -1993,11 +1945,13 @@ async function checkWeight(){
         }
 
 
-        document.getElementById(
-            "actualWeight"
-        ).innerText =
-            actualWeight;
-
+        /*
+         * ============================================
+         * ALLOWED WEIGHT
+         *
+         * Expected + 50 g
+         * ============================================
+         */
 
         const allowedWeight =
             expectedWeight + 50;
@@ -2005,7 +1959,7 @@ async function checkWeight(){
 
         /*
          * ============================================
-         * WEIGHT PASSED
+         * CART VERIFIED
          * ============================================
          */
 
@@ -2016,7 +1970,7 @@ async function checkWeight(){
 
             setWeightStatus(
                 "success",
-                "✓ Weight verified"
+                "✓ Cart verified — You can proceed to payment"
             );
 
 
@@ -2030,10 +1984,6 @@ async function checkWeight(){
                 "none";
 
 
-            /*
-             * Unlock payment.
-             */
-
             setPaymentLocked(false);
 
         }
@@ -2041,7 +1991,7 @@ async function checkWeight(){
 
         /*
          * ============================================
-         * EXTRA ITEM DETECTED
+         * EXTRA ITEM
          * ============================================
          */
 
@@ -2070,20 +2020,8 @@ async function checkWeight(){
 
                 "<strong>Extra item detected.</strong><br>" +
 
-                "Expected: " +
-                expectedWeight +
-                " g<br>" +
+                "Please remove the extra item from your cart and place the cart back on the weighing area.";
 
-                "Actual: " +
-                actualWeight +
-                " g<br><br>" +
-
-                "Please remove the extra item and place the cart back on the weighing area.";
-
-
-            /*
-             * Lock payment immediately.
-             */
 
             setPaymentLocked(true);
 
@@ -2103,15 +2041,9 @@ async function checkWeight(){
         weightVerified = false;
 
 
-        document.getElementById(
-            "actualWeight"
-        ).innerText =
-            "--";
-
-
         setWeightStatus(
             "error",
-            "⚠ Weight sensor unavailable"
+            "⚠ Weight verification unavailable"
         );
 
 
@@ -2127,9 +2059,9 @@ async function checkWeight(){
 
         warning.innerHTML =
 
-            "<strong>Unable to verify cart weight.</strong><br>" +
+            "<strong>Unable to verify your cart.</strong><br>" +
 
-            "Please make sure the weighing system is connected.";
+            "Please make sure the cart is correctly placed and try again.";
 
 
         setPaymentLocked(true);
@@ -2204,7 +2136,6 @@ function setPaymentLocked(locked){
 
         payButton.disabled = true;
 
-
     }
 
     else{
@@ -2213,10 +2144,6 @@ function setPaymentLocked(locked){
             "payment-locked"
         );
 
-
-        /*
-           Only unlock if weight is currently verified.
-        */
 
         payButton.disabled =
             !weightVerified;
@@ -2279,15 +2206,10 @@ async function processPayment(){
     }
 
 
-    /*
-       Never allow payment without
-       weight verification.
-    */
-
     if(!weightVerified){
 
         alert(
-            "Please complete weight verification before payment."
+            "Please complete cart verification before payment."
         );
 
         return;
@@ -2312,10 +2234,6 @@ async function processPayment(){
     }
 
 
-    /*
-       Prevent double clicks.
-    */
-
     if(paymentProcessing){
 
         return;
@@ -2333,28 +2251,22 @@ async function processPayment(){
 
 
     /*
-       Keep weight checking active.
-       DO NOT stop weightTimer here.
+       Weight verification continues
+       while payment is processing.
     */
 
     button.disabled = true;
 
     button.innerText =
-        "Checking weight...";
+        "Checking cart...";
 
 
     /*
-       Perform one final weight check
-       before payment starts.
+       Final weight check.
     */
 
     await checkWeight();
 
-
-    /*
-       Weight may have changed during
-       the final check.
-    */
 
     if(!weightVerified){
 
@@ -2375,11 +2287,6 @@ async function processPayment(){
     }
 
 
-    /*
-       Weight is still valid.
-       Simulate payment.
-    */
-
     button.innerText =
         "Processing payment...";
 
@@ -2392,8 +2299,8 @@ async function processPayment(){
         async()=>{
 
             /*
-               Check weight AGAIN immediately
-               before confirming the order.
+               Check weight again before
+               confirming payment.
             */
 
             await checkWeight();
@@ -2444,8 +2351,8 @@ function createOrder(
 ){
 
     /*
-       Payment is now successfully completed.
-       Stop weight verification.
+       Payment completed successfully.
+       Stop weight verification now.
     */
 
     if(weightTimer){
