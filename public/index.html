@@ -1,93 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
 <title>SBF SmartCart</title>
 
+
 <style>
+
 *{
-    box-sizing:border-box
+    box-sizing:border-box;
 }
 
 body{
+
     margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
     background:#f5f6f8;
+
     color:#171717;
 }
 
+
+/* =====================================================
+   HEADER
+===================================================== */
+
 header{
+
     height:64px;
+
     background:#fff;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     padding:0 18px;
+
     border-bottom:1px solid #e5e5e5;
+
     position:sticky;
+
     top:0;
+
     z-index:100;
 }
 
+
 .logo{
+
     font-size:22px;
+
     font-weight:800;
+
     letter-spacing:-.5px;
+
+    cursor:pointer;
+
+    user-select:none;
 }
 
+
 .cart-button{
+
     position:relative;
+
     width:44px;
+
     height:44px;
+
     border:none;
+
     border-radius:12px;
+
     background:#111;
+
     color:#fff;
+
     font-size:20px;
+
     cursor:pointer;
 }
 
+
 .cart-count{
+
     position:absolute;
+
     top:-5px;
+
     right:-5px;
+
     width:20px;
+
     height:20px;
+
     border-radius:50%;
+
     background:#ff3b30;
+
     color:#fff;
+
     font-size:11px;
+
     font-weight:700;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 }
 
+
 main{
+
     width:100%;
+
     max-width:700px;
+
     margin:auto;
+
     padding:22px 14px 80px;
 }
 
+
 .screen{
-    display:none
+
+    display:none;
 }
+
 
 .screen.active{
-    display:block
+
+    display:block;
 }
 
+
 .page-title{
+
     font-size:28px;
+
     font-weight:800;
+
     margin:5px 0 4px;
 }
 
+
 .page-subtitle{
+
     color:#777;
+
     font-size:15px;
+
     margin-bottom:20px;
 }
 
@@ -97,67 +179,114 @@ main{
 ===================================================== */
 
 .scanner-card{
+
     background:#fff;
+
     border-radius:18px;
+
     padding:12px;
-    box-shadow:0 4px 18px rgba(0,0,0,.06);
+
+    box-shadow:
+        0 4px 18px rgba(0,0,0,.06);
 }
 
+
 #scanner-container{
+
     position:relative;
+
     width:100%;
+
     max-width:420px;
+
     height:220px;
+
     margin:auto;
+
     background:#000;
+
     border-radius:14px;
+
     overflow:hidden;
 }
 
+
 #video{
+
     width:100%;
+
     height:100%;
+
     display:block;
+
     object-fit:cover;
 }
 
+
 #scan-box{
+
     position:absolute;
+
     width:72%;
+
     height:30%;
+
     left:14%;
+
     top:35%;
+
     border:2px solid #00d26a;
+
     border-radius:9px;
+
     pointer-events:none;
 }
 
+
 .scanner-status{
+
     text-align:center;
+
     margin:11px 0 3px;
+
     color:#666;
+
     font-size:14px;
 }
+
 
 .scanner-button,
 .add-button,
 .checkout-button,
 .pay-button{
+
     width:100%;
+
     padding:14px;
+
     margin-top:10px;
+
     border:none;
+
     border-radius:11px;
+
     background:#111;
+
     color:#fff;
+
     font-size:15px;
+
     font-weight:700;
+
     cursor:pointer;
 }
 
+
 .scanner-button:disabled,
 .pay-button:disabled{
+
     opacity:.45;
+
     cursor:not-allowed;
 }
 
@@ -167,30 +296,48 @@ main{
 ===================================================== */
 
 .product-card{
+
     margin-top:16px;
+
     background:#fff;
+
     border-radius:18px;
+
     padding:18px;
-    box-shadow:0 4px 18px rgba(0,0,0,.06);
+
+    box-shadow:
+        0 4px 18px rgba(0,0,0,.06);
 }
 
+
 .product-name{
+
     font-size:21px;
+
     font-weight:800;
+
     margin-bottom:14px;
 }
 
+
 .product-info,
 .summary-row{
+
     display:flex;
+
     justify-content:space-between;
+
     gap:15px;
+
     margin:9px 0;
+
     color:#555;
 }
 
+
 .product-info strong,
 .summary-row strong{
+
     color:#111;
 }
 
@@ -200,86 +347,147 @@ main{
 ===================================================== */
 
 .cart-item{
+
     background:#fff;
+
     border-radius:15px;
+
     padding:15px;
+
     margin-bottom:10px;
+
     display:flex;
+
     align-items:center;
+
     gap:12px;
-    box-shadow:0 3px 12px rgba(0,0,0,.04);
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,.04);
 }
 
+
 .cart-item-info{
+
     flex:1;
+
     min-width:0;
 }
 
+
 .cart-item-name{
+
     font-size:16px;
+
     font-weight:700;
 }
 
+
 .cart-item-price{
+
     margin-top:4px;
+
     color:#777;
+
     font-size:13px;
 }
 
+
 .quantity-control{
+
     display:flex;
+
     align-items:center;
+
     gap:7px;
 }
 
+
 .quantity-control button{
+
     width:31px;
+
     height:31px;
+
     border:none;
+
     border-radius:8px;
+
     background:#eee;
+
     font-size:18px;
+
     cursor:pointer;
 }
 
+
 .quantity{
+
     min-width:20px;
+
     text-align:center;
+
     font-weight:700;
 }
 
+
 .remove-button{
+
     margin-top:5px;
+
     padding:0;
+
     border:none;
+
     background:transparent;
+
     color:#ff3b30;
+
     font-size:12px;
+
     cursor:pointer;
 }
 
+
 .cart-summary,
 .form-card{
+
     background:#fff;
+
     border-radius:17px;
+
     padding:18px;
+
     margin-top:16px;
 }
 
+
 .summary-total{
+
     border-top:1px solid #ddd;
+
     padding-top:14px;
+
     margin-top:14px;
+
     font-size:20px;
+
     font-weight:800;
+
     color:#111;
 }
 
+
 .empty-cart{
+
     background:#fff;
+
     border-radius:17px;
+
     padding:50px 20px;
+
     text-align:center;
+
     color:#777;
 }
 
@@ -289,106 +497,173 @@ main{
 ===================================================== */
 
 .form-card h3{
+
     margin:0 0 13px;
+
     font-size:18px;
 }
 
+
 .input{
+
     width:100%;
+
     padding:13px;
+
     margin:6px 0;
+
     border:1px solid #ddd;
+
     border-radius:10px;
+
     font-size:16px;
+
     outline:none;
 }
 
+
 .payment-option{
+
     border:2px solid #e5e5e5;
+
     border-radius:12px;
+
     padding:14px;
+
     margin:9px 0;
+
     display:flex;
+
     align-items:center;
+
     gap:11px;
+
     cursor:pointer;
 }
 
+
 .payment-option.selected{
+
     border-color:#111;
+
     background:#f7f7f7;
 }
 
+
 .payment-option input{
+
     width:18px;
+
     height:18px;
 }
 
+
 .payment-option strong{
+
     display:block;
+
     margin-bottom:3px;
 }
 
+
 .payment-option div div{
+
     color:#777;
+
     font-size:13px;
 }
 
 
 /* =====================================================
-   WEIGHT VERIFICATION
+   CART VERIFICATION
 ===================================================== */
 
 .weight-card{
+
     background:#fff;
+
     border-radius:17px;
+
     padding:18px;
+
     margin-top:14px;
+
     border:2px solid #e5e5e5;
 }
 
+
 .weight-title{
+
     font-size:18px;
+
     font-weight:800;
+
     margin-bottom:12px;
 }
 
+
 .weight-status{
+
     margin-top:0;
+
     padding:13px;
+
     border-radius:11px;
+
     font-weight:700;
+
     text-align:center;
 }
 
+
 .weight-status.checking{
+
     background:#f1f1f1;
+
     color:#555;
 }
 
+
 .weight-status.success{
+
     background:#dff8e9;
+
     color:#159447;
 }
 
+
 .weight-status.warning{
+
     background:#fff0e0;
+
     color:#c65b00;
 }
 
+
 .weight-status.error{
+
     background:#ffe4e2;
+
     color:#d93025;
 }
 
+
 .weight-warning{
+
     margin-top:10px;
+
     padding:14px;
+
     border-radius:11px;
+
     background:#fff0e0;
+
     color:#a94b00;
+
     font-size:14px;
+
     line-height:1.4;
+
     display:none;
 }
 
@@ -398,11 +673,15 @@ main{
 ===================================================== */
 
 .payment-locked{
+
     opacity:.5;
+
     pointer-events:none;
 }
 
+
 .payment-locked .pay-button{
+
     cursor:not-allowed;
 }
 
@@ -412,72 +691,125 @@ main{
 ===================================================== */
 
 .success-card{
+
     background:#fff;
+
     border-radius:19px;
+
     padding:28px 18px;
+
     text-align:center;
-    box-shadow:0 4px 18px rgba(0,0,0,.06);
+
+    box-shadow:
+        0 4px 18px rgba(0,0,0,.06);
 }
 
+
 .success-icon{
+
     width:62px;
+
     height:62px;
+
     margin:auto auto 14px;
+
     border-radius:50%;
+
     background:#dff8e9;
+
     color:#159447;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     font-size:29px;
+
     font-weight:700;
 }
 
+
 .bill{
+
     text-align:left;
+
     margin-top:22px;
+
     border-top:1px dashed #bbb;
+
     padding-top:18px;
 }
 
+
 .bill-item{
+
     display:flex;
+
     justify-content:space-between;
+
     gap:15px;
+
     margin:9px 0;
 }
 
+
 .bill-total{
+
     border-top:1px solid #ddd;
+
     margin-top:14px;
+
     padding-top:14px;
+
     display:flex;
+
     justify-content:space-between;
+
     font-size:19px;
+
     font-weight:800;
 }
 
+
 .print-button,
 .new-order-button{
+
     width:100%;
+
     padding:14px;
+
     border-radius:11px;
+
     font-size:15px;
+
     font-weight:700;
+
     cursor:pointer;
 }
 
+
 .print-button{
+
     margin-top:18px;
+
     border:none;
+
     background:#111;
+
     color:#fff;
 }
 
+
 .new-order-button{
+
     margin-top:9px;
+
     border:1px solid #ddd;
+
     background:#fff;
+
     color:#111;
 }
 
@@ -489,20 +821,29 @@ main{
 @media(max-width:420px){
 
     main{
+
         padding-left:12px;
+
         padding-right:12px;
     }
 
+
     .page-title{
+
         font-size:26px;
     }
 
+
     #scanner-container{
+
         height:205px;
     }
 
+
     .cart-item{
+
         padding:12px;
+
         gap:8px;
     }
 
@@ -516,43 +857,66 @@ main{
 @media print{
 
     body{
-        background:#fff
+
+        background:#fff;
     }
+
 
     header,
     .no-print{
+
         display:none!important;
     }
 
+
     main{
+
         max-width:none;
+
         padding:0;
     }
 
+
     .screen{
+
         display:none!important;
     }
 
+
     #bill-screen{
+
         display:block!important;
     }
 
+
     .success-card{
+
         box-shadow:none;
     }
 
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
 <header>
 
-    <div class="logo">
+    <!-- CLICKING SBF SMARTCART GOES TO SCANNER -->
+
+    <div
+        class="logo"
+        onclick="goToScanner()"
+        title="Go to Scanner"
+    >
         SBF SmartCart
     </div>
 
@@ -833,9 +1197,7 @@ main{
     </div>
 
 
-    <!-- =================================================
-         CART VERIFICATION
-    ================================================== -->
+    <!-- CART VERIFICATION -->
 
     <div class="weight-card">
 
@@ -860,9 +1222,7 @@ main{
     </div>
 
 
-    <!-- =================================================
-         PAYMENT
-    ================================================== -->
+    <!-- PAYMENT -->
 
     <div
         class="form-card payment-locked"
@@ -1081,6 +1441,7 @@ main{
 
 <script>
 
+
 /* =====================================================
    GLOBAL VARIABLES
 ===================================================== */
@@ -1148,6 +1509,69 @@ function showScreen(name){
         startWeightVerification();
 
     }
+
+}
+
+
+/* =====================================================
+   SBF SMARTCART LOGO
+   RETURN TO SCANNER
+===================================================== */
+
+function goToScanner(){
+
+    /*
+        Stop weight verification
+        when leaving checkout.
+    */
+
+    if(weightTimer){
+
+        clearInterval(weightTimer);
+
+        weightTimer = null;
+
+    }
+
+
+    weightVerified = false;
+
+    paymentProcessing = false;
+
+
+    /*
+        Hide any open product card.
+    */
+
+    const product =
+        document.getElementById("product");
+
+
+    if(product){
+
+        product.style.display = "none";
+
+    }
+
+
+    currentProduct = null;
+
+
+    /*
+        Go to scanner screen.
+    */
+
+    showScreen("scan");
+
+
+    /*
+        Start camera again.
+    */
+
+    setTimeout(
+        startScanner,
+        300
+    );
 
 }
 
@@ -1343,6 +1767,15 @@ async function getProduct(barcode){
             data.price;
 
 
+        /*
+            Weight is intentionally NOT
+            displayed to the customer.
+
+            It is still stored internally
+            in currentProduct for verification.
+        */
+
+
         document.getElementById(
             "product"
         ).style.display =
@@ -1413,6 +1846,11 @@ function addCurrentProduct(){
             price:
                 currentProduct.price,
 
+            /*
+                Weight remains stored internally.
+                It is NOT shown to the customer.
+            */
+
             weight:
                 currentProduct.weight,
 
@@ -1475,6 +1913,7 @@ function updateCartCount(){
         cart.reduce(
             (total,item) =>
                 total + item.quantity,
+
             0
         );
 
@@ -1870,8 +2309,10 @@ function startWeightVerification(){
 
 
     /*
-       Continue checking every 1.5 seconds.
-       This remains active until payment succeeds.
+        Continue checking every 1.5 seconds.
+
+        Weight values are never shown
+        to the customer.
     */
 
     weightTimer =
@@ -1898,7 +2339,7 @@ async function checkWeight(){
 
 
     /*
-       Weight calculation happens internally.
+        Weight calculation happens internally.
     */
 
     const expectedWeight =
@@ -1930,7 +2371,9 @@ async function checkWeight(){
 
 
         const actualWeight =
-            Number(data.weight);
+            Number(
+                data.weight
+            );
 
 
         if(
@@ -1946,22 +2389,20 @@ async function checkWeight(){
 
 
         /*
-         * ============================================
-         * ALLOWED WEIGHT
-         *
-         * Expected + 50 g
-         * ============================================
-         */
+            Allowed weight:
+
+            Expected + 50 g
+
+            This value is INTERNAL ONLY.
+        */
 
         const allowedWeight =
             expectedWeight + 50;
 
 
         /*
-         * ============================================
-         * CART VERIFIED
-         * ============================================
-         */
+            CART VERIFIED
+        */
 
         if(actualWeight <= allowedWeight){
 
@@ -1990,10 +2431,8 @@ async function checkWeight(){
 
 
         /*
-         * ============================================
-         * EXTRA ITEM
-         * ============================================
-         */
+            EXTRA ITEM
+        */
 
         else{
 
@@ -2020,7 +2459,7 @@ async function checkWeight(){
 
                 "<strong>Extra item detected.</strong><br>" +
 
-                "Please remove the extra item from your cart and place the cart back on the weighing area.";
+                "Please remove the extra item and place the cart back on the weighing area.";
 
 
             setPaymentLocked(true);
@@ -2075,7 +2514,10 @@ async function checkWeight(){
    WEIGHT STATUS
 ===================================================== */
 
-function setWeightStatus(type,message){
+function setWeightStatus(
+    type,
+    message
+){
 
     const status =
         document.getElementById(
@@ -2137,6 +2579,7 @@ function setPaymentLocked(locked){
         payButton.disabled = true;
 
     }
+
 
     else{
 
@@ -2251,8 +2694,8 @@ async function processPayment(){
 
 
     /*
-       Weight verification continues
-       while payment is processing.
+        Weight verification continues
+        while payment is processing.
     */
 
     button.disabled = true;
@@ -2262,7 +2705,7 @@ async function processPayment(){
 
 
     /*
-       Final weight check.
+        Final weight check.
     */
 
     await checkWeight();
@@ -2299,8 +2742,8 @@ async function processPayment(){
         async()=>{
 
             /*
-               Check weight again before
-               confirming payment.
+                Check weight again before
+                confirming payment.
             */
 
             await checkWeight();
@@ -2326,7 +2769,7 @@ async function processPayment(){
 
 
             /*
-               Payment successful.
+                Payment successful.
             */
 
             createOrder(
@@ -2351,8 +2794,8 @@ function createOrder(
 ){
 
     /*
-       Payment completed successfully.
-       Stop weight verification now.
+        Payment completed successfully.
+        Stop weight verification now.
     */
 
     if(weightTimer){
@@ -2547,5 +2990,7 @@ window.addEventListener(
 
 </script>
 
+
 </body>
+
 </html>

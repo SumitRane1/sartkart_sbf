@@ -19,6 +19,7 @@ const productsPath = path.join(
 let products = [];
 
 try {
+
     products = JSON.parse(
         fs.readFileSync(
             productsPath,
@@ -224,7 +225,7 @@ app.listen(
     () => {
 
         console.log(
-            `SmartCart server running on port ${PORT}`
+            `SBF SmartCart server running on port ${PORT}`
         );
 
     }
