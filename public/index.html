@@ -6,7 +6,9 @@
 <title>SmartCart</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box
+}
 
 body{
     margin:0;
@@ -69,8 +71,13 @@ main{
     padding:22px 14px 80px;
 }
 
-.screen{display:none}
-.screen.active{display:block}
+.screen{
+    display:none
+}
+
+.screen.active{
+    display:block
+}
 
 .page-title{
     font-size:28px;
@@ -381,9 +388,15 @@ main{
     display:none;
 }
 
+/* PAYMENT LOCK */
+
 .payment-locked{
     opacity:.5;
     pointer-events:none;
+}
+
+.payment-locked .pay-button{
+    cursor:not-allowed;
 }
 
 /* BILL */
@@ -459,6 +472,7 @@ main{
 }
 
 @media(max-width:420px){
+
     main{
         padding-left:12px;
         padding-right:12px;
@@ -479,7 +493,10 @@ main{
 }
 
 @media print{
-    body{background:#fff}
+
+    body{
+        background:#fff
+    }
 
     header,
     .no-print{
@@ -503,13 +520,17 @@ main{
         box-shadow:none;
     }
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">SmartCart</div>
+
+    <div class="logo">
+        SmartCart
+    </div>
 
     <button
         class="cart-button"
@@ -517,15 +538,29 @@ main{
         aria-label="Open cart"
     >
         🛒
-        <span class="cart-count" id="cartCount">0</span>
+
+        <span
+            class="cart-count"
+            id="cartCount"
+        >
+            0
+        </span>
+
     </button>
+
 </header>
+
 
 <main>
 
-<!-- SCAN SCREEN -->
+<!-- =====================================================
+     SCAN SCREEN
+===================================================== -->
 
-<section id="scan-screen" class="screen active">
+<section
+    id="scan-screen"
+    class="screen active"
+>
 
     <div class="page-title">
         Smart Shopping
@@ -534,6 +569,7 @@ main{
     <div class="page-subtitle">
         Scan products and add them to your cart
     </div>
+
 
     <div class="scanner-card">
 
@@ -550,12 +586,14 @@ main{
 
         </div>
 
+
         <div
             class="scanner-status"
             id="status"
         >
             Starting camera...
         </div>
+
 
         <button
             class="scanner-button"
@@ -566,6 +604,7 @@ main{
         </button>
 
     </div>
+
 
     <div
         class="product-card"
@@ -578,15 +617,32 @@ main{
             id="productName"
         ></div>
 
-        <div class="product-info">
-            <span>Price</span>
-            <strong>₹<span id="productPrice"></span></strong>
-        </div>
 
         <div class="product-info">
-            <span>Weight</span>
-            <strong><span id="productWeight"></span> g</strong>
+
+            <span>
+                Price
+            </span>
+
+            <strong>
+                ₹<span id="productPrice"></span>
+            </strong>
+
         </div>
+
+
+        <div class="product-info">
+
+            <span>
+                Weight
+            </span>
+
+            <strong>
+                <span id="productWeight"></span> g
+            </strong>
+
+        </div>
+
 
         <button
             class="add-button"
@@ -600,9 +656,14 @@ main{
 </section>
 
 
-<!-- CART SCREEN -->
+<!-- =====================================================
+     CART SCREEN
+===================================================== -->
 
-<section id="cart-screen" class="screen">
+<section
+    id="cart-screen"
+    class="screen"
+>
 
     <div class="page-title">
         Your Cart
@@ -612,7 +673,9 @@ main{
         Review your items before checkout
     </div>
 
+
     <div id="cartItems"></div>
+
 
     <div
         class="cart-summary"
@@ -620,24 +683,56 @@ main{
     >
 
         <div class="summary-row">
-            <span>Items</span>
-            <strong id="summaryItems">0</strong>
+
+            <span>
+                Items
+            </span>
+
+            <strong id="summaryItems">
+                0
+            </strong>
+
         </div>
 
-        <div class="summary-row">
-            <span>Subtotal</span>
-            <strong>₹<span id="summarySubtotal">0</span></strong>
-        </div>
 
         <div class="summary-row">
-            <span>Tax</span>
-            <strong>₹<span id="summaryTax">0</span></strong>
+
+            <span>
+                Subtotal
+            </span>
+
+            <strong>
+                ₹<span id="summarySubtotal">0</span>
+            </strong>
+
         </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Tax
+            </span>
+
+            <strong>
+                ₹<span id="summaryTax">0</span>
+            </strong>
+
+        </div>
+
 
         <div class="summary-row summary-total">
-            <span>Total</span>
-            <strong>₹<span id="summaryTotal">0</span></strong>
+
+            <span>
+                Total
+            </span>
+
+            <strong>
+                ₹<span id="summaryTotal">0</span>
+            </strong>
+
         </div>
+
 
         <button
             class="checkout-button"
@@ -651,9 +746,14 @@ main{
 </section>
 
 
-<!-- CHECKOUT SCREEN -->
+<!-- =====================================================
+     CHECKOUT SCREEN
+===================================================== -->
 
-<section id="checkout-screen" class="screen">
+<section
+    id="checkout-screen"
+    class="screen"
+>
 
     <div class="page-title">
         Checkout
@@ -663,9 +763,15 @@ main{
         Confirm your order
     </div>
 
+
+    <!-- CUSTOMER -->
+
     <div class="form-card">
 
-        <h3>Customer Details</h3>
+        <h3>
+            Customer Details
+        </h3>
+
 
         <input
             class="input"
@@ -673,6 +779,7 @@ main{
             placeholder="Name *"
             autocomplete="name"
         >
+
 
         <input
             class="input"
@@ -685,21 +792,36 @@ main{
     </div>
 
 
+    <!-- ORDER SUMMARY -->
+
     <div class="form-card">
 
-        <h3>Order Summary</h3>
+        <h3>
+            Order Summary
+        </h3>
+
 
         <div id="checkoutItems"></div>
 
+
         <div class="summary-row summary-total">
-            <span>Total</span>
-            <strong>₹<span id="checkoutTotal">0</span></strong>
+
+            <span>
+                Total
+            </span>
+
+            <strong>
+                ₹<span id="checkoutTotal">0</span>
+            </strong>
+
         </div>
 
     </div>
 
 
-    <!-- WEIGHT VERIFICATION -->
+    <!-- =================================================
+         WEIGHT VERIFICATION
+    ================================================== -->
 
     <div class="weight-card">
 
@@ -707,24 +829,45 @@ main{
             Cart Weight Verification
         </div>
 
+
         <div class="weight-row">
-            <span>Expected weight</span>
+
+            <span>
+                Expected weight
+            </span>
+
             <strong>
                 <span id="expectedWeight">0</span> g
             </strong>
+
         </div>
 
+
         <div class="weight-row">
-            <span>Actual weight</span>
+
+            <span>
+                Actual weight
+            </span>
+
             <strong>
                 <span id="actualWeight">--</span> g
             </strong>
+
         </div>
 
+
         <div class="weight-row">
-            <span>Allowed tolerance</span>
-            <strong>+50 g</strong>
+
+            <span>
+                Allowed tolerance
+            </span>
+
+            <strong>
+                +50 g
+            </strong>
+
         </div>
+
 
         <div
             class="weight-status checking"
@@ -732,6 +875,7 @@ main{
         >
             Checking cart weight...
         </div>
+
 
         <div
             class="weight-warning"
@@ -741,14 +885,19 @@ main{
     </div>
 
 
-    <!-- PAYMENT -->
+    <!-- =================================================
+         PAYMENT
+    ================================================== -->
 
     <div
-        class="form-card"
+        class="form-card payment-locked"
         id="paymentCard"
     >
 
-        <h3>Payment Method</h3>
+        <h3>
+            Payment Method
+        </h3>
+
 
         <label
             class="payment-option selected"
@@ -763,8 +912,15 @@ main{
             >
 
             <div>
-                <strong>UPI</strong>
-                <div>Google Pay / PhonePe / UPI</div>
+
+                <strong>
+                    UPI
+                </strong>
+
+                <div>
+                    Google Pay / PhonePe / UPI
+                </div>
+
             </div>
 
         </label>
@@ -782,8 +938,15 @@ main{
             >
 
             <div>
-                <strong>Card</strong>
-                <div>Credit / Debit Card</div>
+
+                <strong>
+                    Card
+                </strong>
+
+                <div>
+                    Credit / Debit Card
+                </div>
+
             </div>
 
         </label>
@@ -801,11 +964,28 @@ main{
             >
 
             <div>
-                <strong>Cash</strong>
-                <div>Pay at checkout counter</div>
+
+                <strong>
+                    Cash
+                </strong>
+
+                <div>
+                    Pay at checkout counter
+                </div>
+
             </div>
 
         </label>
+
+
+        <!-- WEIGHT WARNING DIRECTLY ABOVE BUTTON -->
+
+        <div
+            class="weight-status checking"
+            id="paymentWeightStatus"
+        >
+            🔒 Waiting for weight verification...
+        </div>
 
 
         <button
@@ -822,9 +1002,14 @@ main{
 </section>
 
 
-<!-- BILL SCREEN -->
+<!-- =====================================================
+     BILL SCREEN
+===================================================== -->
 
-<section id="bill-screen" class="screen">
+<section
+    id="bill-screen"
+    class="screen"
+>
 
     <div class="success-card">
 
@@ -832,48 +1017,68 @@ main{
             ✓
         </div>
 
-        <h2>Order Confirmed</h2>
+
+        <h2>
+            Order Confirmed
+        </h2>
+
 
         <p>
             Thank you for shopping with SmartCart.
         </p>
 
+
         <div class="bill">
 
-            <strong>SmartCart</strong>
+            <strong>
+                SmartCart
+            </strong>
+
 
             <p>
                 Order ID:
                 <strong id="orderId"></strong>
             </p>
 
+
             <p>
                 Date:
                 <span id="orderDate"></span>
             </p>
+
 
             <p>
                 Customer:
                 <span id="billCustomer"></span>
             </p>
 
+
             <p>
                 Payment:
                 <span id="billPayment"></span>
             </p>
 
+
             <hr>
+
 
             <div id="billItems"></div>
 
+
             <div class="bill-total">
-                <span>Total</span>
+
+                <span>
+                    Total
+                </span>
+
                 <span>
                     ₹<span id="billTotal">0</span>
                 </span>
+
             </div>
 
         </div>
+
 
         <button
             class="print-button no-print"
@@ -881,6 +1086,7 @@ main{
         >
             Print / Save Bill
         </button>
+
 
         <button
             class="new-order-button no-print"
@@ -895,17 +1101,30 @@ main{
 
 </main>
 
+
 <script src="https://unpkg.com/@zxing/browser@latest"></script>
+
 
 <script>
 
+/* =====================================================
+   GLOBAL VARIABLES
+===================================================== */
+
 let codeReader = null;
+
 let scanning = false;
+
 let currentProduct = null;
+
 let selectedPayment = "upi";
 
 let weightTimer = null;
+
 let weightVerified = false;
+
+let paymentProcessing = false;
+
 
 let cart =
     JSON.parse(
@@ -913,76 +1132,108 @@ let cart =
     ) || [];
 
 
-/* SCREEN NAVIGATION */
+/* =====================================================
+   SCREEN NAVIGATION
+===================================================== */
 
 function showScreen(name){
 
     document
         .querySelectorAll(".screen")
         .forEach(screen => {
+
             screen.classList.remove("active");
+
         });
+
 
     const screen =
         document.getElementById(
             name + "-screen"
         );
 
+
     if(screen){
+
         screen.classList.add("active");
+
     }
+
 
     if(name === "cart"){
+
         updateCartUI();
+
     }
 
+
     if(name === "checkout"){
+
         updateCheckoutUI();
+
         startWeightVerification();
+
     }
 
 }
 
 
-/* CAMERA */
+/* =====================================================
+   CAMERA
+===================================================== */
 
 async function startScanner(){
 
     if(scanning){
+
         return;
+
     }
+
 
     const status =
         document.getElementById("status");
 
+
     const video =
         document.getElementById("video");
+
 
     const button =
         document.getElementById("scanAgain");
 
+
     status.innerText =
         "Requesting camera...";
 
+
     button.disabled = true;
+
 
     try{
 
         if(codeReader){
 
             try{
+
                 codeReader.reset();
-            }catch(e){}
+
+            }
+            catch(e){}
 
         }
+
 
         codeReader =
             new ZXingBrowser.BrowserMultiFormatReader();
 
+
         scanning = true;
+
 
         status.innerText =
             "Point the camera at a barcode";
+
 
         await codeReader.decodeFromConstraints(
 
@@ -992,6 +1243,7 @@ async function startScanner(){
                         ideal:"environment"
                     }
                 },
+
                 audio:false
             },
 
@@ -1000,34 +1252,48 @@ async function startScanner(){
             async(result)=>{
 
                 if(!result){
+
                     return;
+
                 }
+
 
                 const barcode =
                     result.getText();
+
 
                 console.log(
                     "Barcode detected:",
                     barcode
                 );
 
+
                 scanning = false;
 
+
                 try{
+
                     codeReader.reset();
-                }catch(e){}
+
+                }
+                catch(e){}
+
 
                 status.innerText =
                     "Loading product...";
 
+
                 await getProduct(barcode);
+
 
                 button.disabled = false;
 
             }
+
         );
 
     }
+
 
     catch(error){
 
@@ -1036,9 +1302,12 @@ async function startScanner(){
             error
         );
 
+
         scanning = false;
 
+
         button.disabled = false;
+
 
         status.innerText =
             "Camera error: " +
@@ -1051,7 +1320,9 @@ async function startScanner(){
 }
 
 
-/* PRODUCT API */
+/* =====================================================
+   PRODUCT API
+===================================================== */
 
 async function getProduct(barcode){
 
@@ -1063,8 +1334,10 @@ async function getProduct(barcode){
                 encodeURIComponent(barcode)
             );
 
+
         const data =
             await response.json();
+
 
         if(!response.ok){
 
@@ -1073,30 +1346,38 @@ async function getProduct(barcode){
             ).innerText =
                 "Product not found";
 
+
             return;
+
         }
 
+
         currentProduct = data;
+
 
         document.getElementById(
             "productName"
         ).innerText =
             data.name;
 
+
         document.getElementById(
             "productPrice"
         ).innerText =
             data.price;
+
 
         document.getElementById(
             "productWeight"
         ).innerText =
             data.weight;
 
+
         document.getElementById(
             "product"
         ).style.display =
             "block";
+
 
         document.getElementById(
             "status"
@@ -1105,9 +1386,11 @@ async function getProduct(barcode){
 
     }
 
+
     catch(error){
 
         console.error(error);
+
 
         document.getElementById(
             "status"
@@ -1119,13 +1402,18 @@ async function getProduct(barcode){
 }
 
 
-/* ADD PRODUCT */
+/* =====================================================
+   ADD PRODUCT
+===================================================== */
 
 function addCurrentProduct(){
 
     if(!currentProduct){
+
         return;
+
     }
+
 
     const existing =
         cart.find(
@@ -1134,11 +1422,13 @@ function addCurrentProduct(){
                 currentProduct.barcode
         );
 
+
     if(existing){
 
         existing.quantity += 1;
 
     }
+
 
     else{
 
@@ -1162,20 +1452,26 @@ function addCurrentProduct(){
 
     }
 
+
     saveCart();
+
     updateCartCount();
+
 
     document.getElementById(
         "product"
     ).style.display =
         "none";
 
+
     document.getElementById(
         "status"
     ).innerText =
         "Added to cart";
 
+
     currentProduct = null;
+
 
     setTimeout(
         startScanner,
@@ -1185,7 +1481,9 @@ function addCurrentProduct(){
 }
 
 
-/* CART STORAGE */
+/* =====================================================
+   CART STORAGE
+===================================================== */
 
 function saveCart(){
 
@@ -1197,7 +1495,9 @@ function saveCart(){
 }
 
 
-/* CART COUNT */
+/* =====================================================
+   CART COUNT
+===================================================== */
 
 function updateCartCount(){
 
@@ -1208,6 +1508,7 @@ function updateCartCount(){
             0
         );
 
+
     document.getElementById(
         "cartCount"
     ).innerText =
@@ -1216,7 +1517,9 @@ function updateCartCount(){
 }
 
 
-/* CART UI */
+/* =====================================================
+   CART UI
+===================================================== */
 
 function updateCartUI(){
 
@@ -1225,31 +1528,47 @@ function updateCartUI(){
             "cartItems"
         );
 
+
     const summary =
         document.getElementById(
             "cartSummary"
         );
 
+
     if(cart.length === 0){
 
         container.innerHTML = `
+
             <div class="empty-cart">
-                <h3>Your cart is empty</h3>
-                <p>Scan a product to get started.</p>
+
+                <h3>
+                    Your cart is empty
+                </h3>
+
+                <p>
+                    Scan a product to get started.
+                </p>
+
             </div>
+
         `;
+
 
         summary.style.display =
             "none";
+
 
         return;
 
     }
 
+
     summary.style.display =
         "block";
 
+
     container.innerHTML = "";
+
 
     cart.forEach(
         (item,index)=>{
@@ -1258,13 +1577,16 @@ function updateCartUI(){
                 item.price *
                 item.quantity;
 
+
             const div =
                 document.createElement(
                     "div"
                 );
 
+
             div.className =
                 "cart-item";
+
 
             div.innerHTML = `
 
@@ -1287,6 +1609,7 @@ function updateCartUI(){
 
                 </div>
 
+
                 <div class="quantity-control">
 
                     <button
@@ -1307,61 +1630,84 @@ function updateCartUI(){
 
                 </div>
 
+
                 <strong>
                     ₹${itemTotal}
                 </strong>
+
             `;
+
 
             container.appendChild(div);
 
         }
     );
 
+
     calculateTotals();
 
 }
 
 
-/* QUANTITY */
+/* =====================================================
+   QUANTITY
+===================================================== */
 
 function changeQuantity(index,change){
 
     cart[index].quantity += change;
 
+
     if(cart[index].quantity <= 0){
+
         cart.splice(index,1);
+
     }
 
+
     saveCart();
+
     updateCartCount();
+
     updateCartUI();
 
 }
 
 
-/* REMOVE */
+/* =====================================================
+   REMOVE
+===================================================== */
 
 function removeItem(index){
 
     cart.splice(index,1);
 
+
     saveCart();
+
     updateCartCount();
+
     updateCartUI();
 
 }
 
 
-/* TOTALS */
+/* =====================================================
+   TOTALS
+===================================================== */
 
 function calculateTotals(){
 
     let items = 0;
+
     let subtotal = 0;
+
 
     cart.forEach(item=>{
 
-        items += item.quantity;
+        items +=
+            item.quantity;
+
 
         subtotal +=
             item.price *
@@ -1369,51 +1715,68 @@ function calculateTotals(){
 
     });
 
+
     const tax =
         Math.round(
             subtotal * 0.05
         );
 
+
     const total =
         subtotal + tax;
+
 
     document.getElementById(
         "summaryItems"
     ).innerText =
         items;
 
+
     document.getElementById(
         "summarySubtotal"
     ).innerText =
         subtotal;
+
 
     document.getElementById(
         "summaryTax"
     ).innerText =
         tax;
 
+
     document.getElementById(
         "summaryTotal"
     ).innerText =
         total;
 
+
     return{
+
         items,
+
         subtotal,
+
         tax,
+
         total
+
     };
 
 }
 
 
-/* CHECKOUT */
+/* =====================================================
+   CHECKOUT
+===================================================== */
 
 function goToCheckout(){
 
     if(cart.length === 0){
+
         return;
+
     }
+
 
     showScreen("checkout");
 
@@ -1427,7 +1790,9 @@ function updateCheckoutUI(){
             "checkoutItems"
         );
 
+
     container.innerHTML = "";
+
 
     cart.forEach(item=>{
 
@@ -1436,8 +1801,10 @@ function updateCheckoutUI(){
                 "div"
             );
 
+
         div.className =
             "summary-row";
+
 
         div.innerHTML = `
 
@@ -1449,35 +1816,44 @@ function updateCheckoutUI(){
             <strong>
                 ₹${item.price * item.quantity}
             </strong>
+
         `;
+
 
         container.appendChild(div);
 
     });
 
+
     const totals =
         calculateTotals();
+
 
     document.getElementById(
         "checkoutTotal"
     ).innerText =
         totals.total;
 
+
     document.getElementById(
         "payAmount"
     ).innerText =
         totals.total;
+
 
     calculateExpectedWeight();
 
 }
 
 
-/* EXPECTED WEIGHT */
+/* =====================================================
+   EXPECTED WEIGHT
+===================================================== */
 
 function calculateExpectedWeight(){
 
     let expected = 0;
+
 
     cart.forEach(item=>{
 
@@ -1487,29 +1863,69 @@ function calculateExpectedWeight(){
 
     });
 
+
     document.getElementById(
         "expectedWeight"
     ).innerText =
         expected;
+
 
     return expected;
 
 }
 
 
-/* WEIGHT VERIFICATION */
+/* =====================================================
+   START CONTINUOUS WEIGHT VERIFICATION
+===================================================== */
 
 function startWeightVerification(){
 
+    /*
+       Always stop an old timer first.
+    */
+
     if(weightTimer){
+
         clearInterval(weightTimer);
+
+        weightTimer = null;
+
     }
+
+
+    /*
+       Payment must start locked.
+    */
 
     weightVerified = false;
 
+    paymentProcessing = false;
+
+
     setPaymentLocked(true);
 
+
+    /*
+       Show checking state.
+    */
+
+    setWeightStatus(
+        "checking",
+        "🔄 Checking cart weight..."
+    );
+
+
+    /*
+       Check immediately.
+    */
+
     checkWeight();
+
+
+    /*
+       Continue checking every 1.5 seconds.
+    */
 
     weightTimer =
         setInterval(
@@ -1520,66 +1936,103 @@ function startWeightVerification(){
 }
 
 
+/* =====================================================
+   CHECK WEIGHT
+===================================================== */
+
 async function checkWeight(){
 
     if(cart.length === 0){
+
         return;
+
     }
+
 
     const expectedWeight =
         calculateExpectedWeight();
+
 
     try{
 
         const response =
             await fetch(
-                "/api/weight"
+                "/api/weight",
+                {
+                    cache:"no-store"
+                }
             );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Weight API error"
+            );
+
+        }
+
 
         const data =
             await response.json();
 
+
         const actualWeight =
             Number(data.weight);
+
+
+        if(
+            !Number.isFinite(actualWeight) ||
+            actualWeight < 0
+        ){
+
+            throw new Error(
+                "Invalid weight"
+            );
+
+        }
+
 
         document.getElementById(
             "actualWeight"
         ).innerText =
             actualWeight;
 
-        const status =
-            document.getElementById(
-                "weightStatus"
-            );
-
-        const warning =
-            document.getElementById(
-                "weightWarning"
-            );
 
         const allowedWeight =
             expectedWeight + 50;
 
 
         /*
+         * ============================================
          * WEIGHT PASSED
-         *
-         * Actual weight can be equal to
-         * expected weight or up to 50 g higher.
+         * ============================================
          */
 
         if(actualWeight <= allowedWeight){
 
             weightVerified = true;
 
-            status.className =
-                "weight-status success";
 
-            status.innerText =
-                "✓ Weight verified";
+            setWeightStatus(
+                "success",
+                "✓ Weight verified"
+            );
+
+
+            const warning =
+                document.getElementById(
+                    "weightWarning"
+                );
+
 
             warning.style.display =
                 "none";
+
+
+            /*
+             * Unlock payment.
+             */
 
             setPaymentLocked(false);
 
@@ -1587,37 +2040,57 @@ async function checkWeight(){
 
 
         /*
-         * EXTRA ITEM
+         * ============================================
+         * EXTRA ITEM DETECTED
+         * ============================================
          */
 
         else{
 
             weightVerified = false;
 
-            status.className =
-                "weight-status warning";
 
-            status.innerText =
-                "⚠ Extra item detected";
+            setWeightStatus(
+                "warning",
+                "⚠ Extra item detected"
+            );
+
+
+            const warning =
+                document.getElementById(
+                    "weightWarning"
+                );
+
 
             warning.style.display =
                 "block";
 
+
             warning.innerHTML =
+
                 "<strong>Extra item detected.</strong><br>" +
+
                 "Expected: " +
                 expectedWeight +
                 " g<br>" +
+
                 "Actual: " +
                 actualWeight +
                 " g<br><br>" +
-                "Please remove the extra item from your cart and place the cart back on the weighing area.";
+
+                "Please remove the extra item and place the cart back on the weighing area.";
+
+
+            /*
+             * Lock payment immediately.
+             */
 
             setPaymentLocked(true);
 
         }
 
     }
+
 
     catch(error){
 
@@ -1626,35 +2099,38 @@ async function checkWeight(){
             error
         );
 
+
         weightVerified = false;
+
 
         document.getElementById(
             "actualWeight"
         ).innerText =
             "--";
 
-        const status =
-            document.getElementById(
-                "weightStatus"
-            );
 
-        status.className =
-            "weight-status error";
+        setWeightStatus(
+            "error",
+            "⚠ Weight sensor unavailable"
+        );
 
-        status.innerText =
-            "⚠ Weight sensor unavailable";
 
         const warning =
             document.getElementById(
                 "weightWarning"
             );
 
+
         warning.style.display =
             "block";
 
+
         warning.innerHTML =
+
             "<strong>Unable to verify cart weight.</strong><br>" +
+
             "Please make sure the weighing system is connected.";
+
 
         setPaymentLocked(true);
 
@@ -1663,7 +2139,47 @@ async function checkWeight(){
 }
 
 
-/* LOCK / UNLOCK PAYMENT */
+/* =====================================================
+   WEIGHT STATUS
+===================================================== */
+
+function setWeightStatus(type,message){
+
+    const status =
+        document.getElementById(
+            "weightStatus"
+        );
+
+
+    const paymentStatus =
+        document.getElementById(
+            "paymentWeightStatus"
+        );
+
+
+    status.className =
+        "weight-status " +
+        type;
+
+
+    status.innerText =
+        message;
+
+
+    paymentStatus.className =
+        "weight-status " +
+        type;
+
+
+    paymentStatus.innerText =
+        message;
+
+}
+
+
+/* =====================================================
+   LOCK / UNLOCK PAYMENT
+===================================================== */
 
 function setPaymentLocked(locked){
 
@@ -1672,10 +2188,12 @@ function setPaymentLocked(locked){
             "paymentCard"
         );
 
+
     const payButton =
         document.getElementById(
             "payButton"
         );
+
 
     if(locked){
 
@@ -1683,7 +2201,9 @@ function setPaymentLocked(locked){
             "payment-locked"
         );
 
+
         payButton.disabled = true;
+
 
     }
 
@@ -1693,14 +2213,22 @@ function setPaymentLocked(locked){
             "payment-locked"
         );
 
-        payButton.disabled = false;
+
+        /*
+           Only unlock if weight is currently verified.
+        */
+
+        payButton.disabled =
+            !weightVerified;
 
     }
 
 }
 
 
-/* PAYMENT */
+/* =====================================================
+   PAYMENT SELECTION
+===================================================== */
 
 function selectPayment(
     method,
@@ -1708,21 +2236,28 @@ function selectPayment(
 ){
 
     if(!weightVerified){
+
         return;
+
     }
+
 
     selectedPayment =
         method;
+
 
     document
         .querySelectorAll(
             ".payment-option"
         )
         .forEach(option=>{
+
             option.classList.remove(
                 "selected"
             );
+
         });
+
 
     element.classList.add(
         "selected"
@@ -1731,13 +2266,23 @@ function selectPayment(
 }
 
 
-/* PROCESS PAYMENT */
+/* =====================================================
+   PROCESS PAYMENT
+===================================================== */
 
-function processPayment(){
+async function processPayment(){
 
     if(cart.length === 0){
+
         return;
+
     }
+
+
+    /*
+       Never allow payment without
+       weight verification.
+    */
 
     if(!weightVerified){
 
@@ -1746,12 +2291,15 @@ function processPayment(){
         );
 
         return;
+
     }
+
 
     const name =
         document.getElementById(
             "customerName"
         ).value.trim();
+
 
     if(!name){
 
@@ -1760,31 +2308,125 @@ function processPayment(){
         );
 
         return;
+
     }
 
-    const totals =
-        calculateTotals();
+
+    /*
+       Prevent double clicks.
+    */
+
+    if(paymentProcessing){
+
+        return;
+
+    }
+
+
+    paymentProcessing = true;
+
 
     const button =
         document.getElementById(
             "payButton"
         );
 
+
+    /*
+       Keep weight checking active.
+       DO NOT stop weightTimer here.
+    */
+
     button.disabled = true;
+
+    button.innerText =
+        "Checking weight...";
+
+
+    /*
+       Perform one final weight check
+       before payment starts.
+    */
+
+    await checkWeight();
+
+
+    /*
+       Weight may have changed during
+       the final check.
+    */
+
+    if(!weightVerified){
+
+        paymentProcessing = false;
+
+
+        button.innerHTML =
+            'Pay ₹<span id="payAmount">' +
+            calculateTotals().total +
+            '</span>';
+
+
+        setPaymentLocked(true);
+
+
+        return;
+
+    }
+
+
+    /*
+       Weight is still valid.
+       Simulate payment.
+    */
 
     button.innerText =
         "Processing payment...";
 
-    if(weightTimer){
-        clearInterval(weightTimer);
-    }
+
+    const totals =
+        calculateTotals();
+
 
     setTimeout(
-        ()=>{
+        async()=>{
+
+            /*
+               Check weight AGAIN immediately
+               before confirming the order.
+            */
+
+            await checkWeight();
+
+
+            if(!weightVerified){
+
+                paymentProcessing = false;
+
+
+                button.innerHTML =
+                    'Pay ₹<span id="payAmount">' +
+                    totals.total +
+                    '</span>';
+
+
+                setPaymentLocked(true);
+
+
+                return;
+
+            }
+
+
+            /*
+               Payment successful.
+            */
+
             createOrder(
                 name,
                 totals
             );
+
         },
         1200
     );
@@ -1792,12 +2434,31 @@ function processPayment(){
 }
 
 
-/* CREATE BILL */
+/* =====================================================
+   CREATE BILL
+===================================================== */
 
 function createOrder(
     name,
     totals
 ){
+
+    /*
+       Payment is now successfully completed.
+       Stop weight verification.
+    */
+
+    if(weightTimer){
+
+        clearInterval(weightTimer);
+
+        weightTimer = null;
+
+    }
+
+
+    paymentProcessing = false;
+
 
     const orderId =
         "SC" +
@@ -1805,40 +2466,49 @@ function createOrder(
             .toString()
             .slice(-8);
 
+
     const date =
         new Date();
+
 
     document.getElementById(
         "orderId"
     ).innerText =
         orderId;
 
+
     document.getElementById(
         "orderDate"
     ).innerText =
         date.toLocaleString();
+
 
     document.getElementById(
         "billCustomer"
     ).innerText =
         name;
 
+
     document.getElementById(
         "billPayment"
     ).innerText =
         selectedPayment.toUpperCase();
+
 
     document.getElementById(
         "billTotal"
     ).innerText =
         totals.total;
 
+
     const billItems =
         document.getElementById(
             "billItems"
         );
 
+
     billItems.innerHTML = "";
+
 
     cart.forEach(item=>{
 
@@ -1847,8 +2517,10 @@ function createOrder(
                 "div"
             );
 
+
         div.className =
             "bill-item";
+
 
         div.innerHTML = `
 
@@ -1860,47 +2532,70 @@ function createOrder(
             <strong>
                 ₹${item.price * item.quantity}
             </strong>
+
         `;
+
 
         billItems.appendChild(div);
 
     });
 
+
     showScreen("bill");
+
 
     cart = [];
 
+
     saveCart();
+
     updateCartCount();
 
 }
 
 
-/* NEW ORDER */
+/* =====================================================
+   NEW ORDER
+===================================================== */
 
 function newOrder(){
 
     currentProduct = null;
+
     weightVerified = false;
 
+    paymentProcessing = false;
+
+
     if(weightTimer){
+
         clearInterval(weightTimer);
+
+        weightTimer = null;
+
     }
+
 
     document.getElementById(
         "product"
     ).style.display =
         "none";
 
+
     document.getElementById(
         "customerName"
-    ).value = "";
+    ).value =
+        "";
+
 
     document.getElementById(
         "customerPhone"
-    ).value = "";
+    ).value =
+        "";
+
 
     showScreen("scan");
+
 
     setTimeout(
         startScanner,
@@ -1910,7 +2605,9 @@ function newOrder(){
 }
 
 
-/* HTML ESCAPE */
+/* =====================================================
+   HTML ESCAPE
+===================================================== */
 
 function escapeHTML(text){
 
@@ -1919,17 +2616,22 @@ function escapeHTML(text){
             "div"
         );
 
+
     div.textContent =
         text;
+
 
     return div.innerHTML;
 
 }
 
 
-/* STARTUP */
+/* =====================================================
+   STARTUP
+===================================================== */
 
 updateCartCount();
+
 
 window.addEventListener(
     "load",
