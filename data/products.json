@@ -1,0 +1,20 @@
+[
+  {
+    "barcode": "7143265017727",
+    "name": "Marie Gold",
+    "price": 10,
+    "weight": 71
+  },
+  {
+    "barcode": "6161235907107",
+    "name": "Sprite",
+    "price": 20,
+    "weight": 250
+  },
+  {
+    "barcode": "7032572402817",
+    "name": "Chips",
+    "price": 10,
+    "weight": 71
+  }
+]
