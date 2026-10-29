@@ -1,5 +1,7 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,41 +9,66 @@
     <title>SmartCart</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
+            font-family: Arial, sans-serif;
             background: #f5f5f5;
+            color: #222;
             text-align: center;
         }
 
         h1 {
-            margin-bottom: 20px;
+            margin: 10px 0 8px;
         }
 
-        #reader {
+        #status {
+            margin: 10px 0 18px;
+            font-size: 16px;
+        }
+
+        #scanner-container {
             width: 100%;
             max-width: 500px;
             margin: auto;
+            position: relative;
             background: #000;
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
         }
 
+        #video {
+            width: 100%;
+            display: block;
+        }
+
+        #scan-box {
+            position: absolute;
+            width: 70%;
+            height: 25%;
+            top: 37.5%;
+            left: 15%;
+            border: 3px solid #00ff66;
+            border-radius: 10px;
+            pointer-events: none;
+        }
+
         button {
-            margin-top: 15px;
-            padding: 12px 20px;
+            margin-top: 18px;
+            padding: 13px 24px;
             border: none;
             border-radius: 8px;
             background: #222;
             color: white;
             font-size: 16px;
-            cursor: pointer;
         }
 
-        #status {
-            margin: 15px 0;
-            font-size: 16px;
+        button:disabled {
+            opacity: 0.5;
         }
 
         #product {
@@ -52,7 +79,7 @@
             background: white;
             border-radius: 12px;
             text-align: left;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         #product h2 {
@@ -71,12 +98,18 @@
     <h1>SmartCart</h1>
 
     <div id="status">
-        Point the camera at a barcode
+        Starting camera...
     </div>
 
-    <div id="reader"></div>
+    <div id="scanner-container">
 
-    <button onclick="startScanner()">
+        <video id="video" autoplay muted playsinline></video>
+
+        <div id="scan-box"></div>
+
+    </div>
+
+    <button id="scanAgain" onclick="startScanner()">
         Scan Again
     </button>
 
@@ -101,13 +134,15 @@
 
     </div>
 
-    <!-- ZXing Barcode Scanner -->
+
+    <!-- ZXing -->
     <script src="https://unpkg.com/@zxing/browser@latest"></script>
 
     <script>
 
-        let codeReader;
+        let codeReader = null;
         let scanning = false;
+
 
         async function startScanner() {
 
@@ -115,48 +150,45 @@
                 return;
             }
 
-            scanning = true;
+            const status = document.getElementById("status");
+            const video = document.getElementById("video");
+            const product = document.getElementById("product");
+            const scanButton = document.getElementById("scanAgain");
 
-            document.getElementById("status").innerText =
-                "Starting camera...";
+            product.style.display = "none";
 
-            document.getElementById("product").style.display = "none";
+            status.innerText = "Requesting camera...";
 
-            codeReader = new ZXingBrowser.BrowserMultiFormatReader();
+            scanButton.disabled = true;
 
             try {
 
-                const devices =
-                    await ZXingBrowser.BrowserCodeReader.listVideoInputDevices();
-
-                if (devices.length === 0) {
-                    throw new Error("No camera found");
-                }
-
-                // Prefer rear camera
-                let selectedDevice = devices[devices.length - 1];
-
-                for (const device of devices) {
-
-                    const label =
-                        (device.label || "").toLowerCase();
-
-                    if (
-                        label.includes("back") ||
-                        label.includes("rear") ||
-                        label.includes("environment")
-                    ) {
-                        selectedDevice = device;
-                        break;
+                // Stop previous scanner
+                if (codeReader) {
+                    try {
+                        codeReader.reset();
+                    } catch (e) {
+                        console.log("Previous scanner reset");
                     }
                 }
 
-                document.getElementById("status").innerText =
-                    "Scanning...";
+                codeReader =
+                    new ZXingBrowser.BrowserMultiFormatReader();
 
-                await codeReader.decodeFromVideoDevice(
-                    selectedDevice.deviceId,
-                    "reader",
+                scanning = true;
+
+                status.innerText = "Point the camera at a barcode";
+
+                await codeReader.decodeFromConstraints(
+                    {
+                        video: {
+                            facingMode: {
+                                ideal: "environment"
+                            }
+                        },
+                        audio: false
+                    },
+                    video,
                     async (result, error) => {
 
                         if (!result) {
@@ -165,83 +197,128 @@
 
                         const barcode = result.getText();
 
-                        console.log("Barcode detected:", barcode);
+                        console.log(
+                            "Barcode detected:",
+                            barcode
+                        );
 
                         scanning = false;
 
-                        codeReader.reset();
+                        try {
+                            codeReader.reset();
+                        } catch (e) {
+                            console.log("Scanner stopped");
+                        }
 
-                        document.getElementById("status").innerText =
+                        status.innerText =
                             "Barcode detected. Loading product...";
 
                         await getProduct(barcode);
+
+                        scanButton.disabled = false;
                     }
                 );
 
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    "Camera error:",
+                    error
+                );
 
                 scanning = false;
 
-                document.getElementById("status").innerText =
-                    "Camera error: " + error.message;
+                scanButton.disabled = false;
+
+                status.innerText =
+                    "Camera error: " +
+                    (error.name || "Unknown") +
+                    " - " +
+                    (error.message || error);
+
             }
+
         }
 
 
         async function getProduct(barcode) {
 
+            const status =
+                document.getElementById("status");
+
             try {
 
                 const response =
                     await fetch(
-                        `/api/product?barcode=${encodeURIComponent(barcode)}`
+                        "/api/product?barcode=" +
+                        encodeURIComponent(barcode)
                     );
 
-                const data = await response.json();
+                const data =
+                    await response.json();
 
                 if (!response.ok) {
 
-                    document.getElementById("status").innerText =
+                    status.innerText =
                         "Product not found";
 
                     return;
                 }
 
-                // Display product
-                document.getElementById("productName").innerText =
-                    data.name;
 
-                document.getElementById("productPrice").innerText =
-                    data.price;
+                document.getElementById(
+                    "productName"
+                ).innerText = data.name;
 
-                document.getElementById("productWeight").innerText =
-                    data.weight;
 
-                document.getElementById("productBarcode").innerText =
-                    data.barcode;
+                document.getElementById(
+                    "productPrice"
+                ).innerText = data.price;
 
-                document.getElementById("product").style.display =
-                    "block";
 
-                document.getElementById("status").innerText =
+                document.getElementById(
+                    "productWeight"
+                ).innerText = data.weight;
+
+
+                document.getElementById(
+                    "productBarcode"
+                ).innerText = data.barcode;
+
+
+                document.getElementById(
+                    "product"
+                ).style.display = "block";
+
+
+                status.innerText =
                     "Product found!";
 
-            } catch (error) {
+            }
 
-                console.error(error);
+            catch (error) {
 
-                document.getElementById("status").innerText =
+                console.error(
+                    "Product API error:",
+                    error
+                );
+
+                status.innerText =
                     "Could not connect to server";
             }
+
         }
 
 
-        // Start scanner automatically
-        startScanner();
+        // Start automatically
+        window.addEventListener(
+            "load",
+            startScanner
+        );
 
     </script>
 
 </body>
+
 </html>
+```

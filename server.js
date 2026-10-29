@@ -7,14 +7,27 @@ const PORT = process.env.PORT || 3000;
 
 // Load products from JSON
 const productsPath = path.join(__dirname, "data", "products.json");
-const products = JSON.parse(fs.readFileSync(productsPath, "utf8"));
 
-// Serve website
-app.use(express.static("public"));
+let products = [];
+
+try {
+    products = JSON.parse(
+        fs.readFileSync(productsPath, "utf8")
+    );
+
+    console.log(`Loaded ${products.length} products`);
+} catch (error) {
+    console.error("Failed to load products.json:", error);
+    process.exit(1);
+}
+
+// Serve frontend
+app.use(express.static(path.join(__dirname, "public")));
 
 // Product API
 app.get("/api/product", (req, res) => {
-    const barcode = req.query.barcode;
+
+    const barcode = String(req.query.barcode || "").trim();
 
     if (!barcode) {
         return res.status(400).json({
@@ -22,17 +35,28 @@ app.get("/api/product", (req, res) => {
         });
     }
 
+    console.log("Barcode requested:", barcode);
+
     const product = products.find(
-        item => item.barcode === barcode
+        item => String(item.barcode) === barcode
     );
 
     if (!product) {
         return res.status(404).json({
-            error: "Product not found"
+            error: "Product not found",
+            barcode: barcode
         });
     }
 
     res.json(product);
+});
+
+// Health check
+app.get("/api/health", (req, res) => {
+    res.json({
+        status: "OK",
+        products: products.length
+    });
 });
 
 // Start server
