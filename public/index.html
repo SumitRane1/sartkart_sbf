@@ -6,503 +6,510 @@
 <title>SmartCart</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    background:#f5f6f8;
+    color:#171717;
 }
 
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-    background: #f5f6f8;
-    color: #171717;
+header{
+    height:64px;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 18px;
+    border-bottom:1px solid #e5e5e5;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
-/* HEADER */
-
-header {
-    height: 64px;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 18px;
-    border-bottom: 1px solid #e5e5e5;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+.logo{
+    font-size:22px;
+    font-weight:800;
+    letter-spacing:-.5px;
 }
 
-.logo {
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: -0.5px;
+.cart-button{
+    position:relative;
+    width:44px;
+    height:44px;
+    border:none;
+    border-radius:12px;
+    background:#111;
+    color:#fff;
+    font-size:20px;
+    cursor:pointer;
 }
 
-.cart-button {
-    position: relative;
-    width: 44px;
-    height: 44px;
-    border: none;
-    border-radius: 12px;
-    background: #111111;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
+.cart-count{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:#ff3b30;
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-.cart-count {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #ff3b30;
-    color: white;
-    font-size: 11px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+main{
+    width:100%;
+    max-width:700px;
+    margin:auto;
+    padding:22px 14px 80px;
 }
 
-/* MAIN */
+.screen{display:none}
+.screen.active{display:block}
 
-main {
-    width: 100%;
-    max-width: 700px;
-    margin: auto;
-    padding: 22px 14px 80px;
+.page-title{
+    font-size:28px;
+    font-weight:800;
+    margin:5px 0 4px;
 }
 
-.screen {
-    display: none;
-}
-
-.screen.active {
-    display: block;
-}
-
-.page-title {
-    font-size: 28px;
-    font-weight: 800;
-    margin: 5px 0 4px;
-}
-
-.page-subtitle {
-    color: #777777;
-    font-size: 15px;
-    margin-bottom: 20px;
+.page-subtitle{
+    color:#777;
+    font-size:15px;
+    margin-bottom:20px;
 }
 
 /* SCANNER */
 
-.scanner-card {
-    background: white;
-    border-radius: 18px;
-    padding: 12px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+.scanner-card{
+    background:#fff;
+    border-radius:18px;
+    padding:12px;
+    box-shadow:0 4px 18px rgba(0,0,0,.06);
 }
 
-#scanner-container {
-    position: relative;
-    width: 100%;
-    max-width: 420px;
-    height: 220px;
-    margin: auto;
-    background: #000000;
-    border-radius: 14px;
-    overflow: hidden;
+#scanner-container{
+    position:relative;
+    width:100%;
+    max-width:420px;
+    height:220px;
+    margin:auto;
+    background:#000;
+    border-radius:14px;
+    overflow:hidden;
 }
 
-#video {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
+#video{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
 }
 
-#scan-box {
-    position: absolute;
-    width: 72%;
-    height: 30%;
-    left: 14%;
-    top: 35%;
-    border: 2px solid #00d26a;
-    border-radius: 9px;
-    pointer-events: none;
+#scan-box{
+    position:absolute;
+    width:72%;
+    height:30%;
+    left:14%;
+    top:35%;
+    border:2px solid #00d26a;
+    border-radius:9px;
+    pointer-events:none;
 }
 
-.scanner-status {
-    text-align: center;
-    margin: 11px 0 3px;
-    color: #666666;
-    font-size: 14px;
+.scanner-status{
+    text-align:center;
+    margin:11px 0 3px;
+    color:#666;
+    font-size:14px;
 }
 
-.scanner-button {
-    width: 100%;
-    padding: 13px;
-    margin-top: 9px;
-    border: none;
-    border-radius: 10px;
-    background: #111111;
-    color: white;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
+.scanner-button,
+.add-button,
+.checkout-button,
+.pay-button{
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    border:none;
+    border-radius:11px;
+    background:#111;
+    color:#fff;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
 }
 
-.scanner-button:disabled {
-    opacity: 0.5;
+.scanner-button:disabled,
+.pay-button:disabled{
+    opacity:.45;
+    cursor:not-allowed;
 }
 
 /* PRODUCT */
 
-.product-card {
-    margin-top: 16px;
-    background: white;
-    border-radius: 18px;
-    padding: 18px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+.product-card{
+    margin-top:16px;
+    background:#fff;
+    border-radius:18px;
+    padding:18px;
+    box-shadow:0 4px 18px rgba(0,0,0,.06);
 }
 
-.product-name {
-    font-size: 21px;
-    font-weight: 800;
-    margin-bottom: 14px;
+.product-name{
+    font-size:21px;
+    font-weight:800;
+    margin-bottom:14px;
 }
 
-.product-info {
-    display: flex;
-    justify-content: space-between;
-    margin: 8px 0;
-    color: #666666;
+.product-info,
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin:9px 0;
+    color:#555;
 }
 
-.product-info strong {
-    color: #111111;
-}
-
-.add-button {
-    width: 100%;
-    padding: 14px;
-    margin-top: 14px;
-    border: none;
-    border-radius: 11px;
-    background: #111111;
-    color: white;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
+.product-info strong,
+.summary-row strong{
+    color:#111;
 }
 
 /* CART */
 
-.cart-item {
-    background: white;
-    border-radius: 15px;
-    padding: 15px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+.cart-item{
+    background:#fff;
+    border-radius:15px;
+    padding:15px;
+    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    box-shadow:0 3px 12px rgba(0,0,0,.04);
 }
 
-.cart-item-info {
-    flex: 1;
-    min-width: 0;
+.cart-item-info{
+    flex:1;
+    min-width:0;
 }
 
-.cart-item-name {
-    font-size: 16px;
-    font-weight: 700;
+.cart-item-name{
+    font-size:16px;
+    font-weight:700;
 }
 
-.cart-item-price {
-    margin-top: 4px;
-    color: #777777;
-    font-size: 13px;
+.cart-item-price{
+    margin-top:4px;
+    color:#777;
+    font-size:13px;
 }
 
-.quantity-control {
-    display: flex;
-    align-items: center;
-    gap: 7px;
+.quantity-control{
+    display:flex;
+    align-items:center;
+    gap:7px;
 }
 
-.quantity-control button {
-    width: 31px;
-    height: 31px;
-    border: none;
-    border-radius: 8px;
-    background: #eeeeee;
-    font-size: 18px;
-    cursor: pointer;
+.quantity-control button{
+    width:31px;
+    height:31px;
+    border:none;
+    border-radius:8px;
+    background:#eee;
+    font-size:18px;
+    cursor:pointer;
 }
 
-.quantity {
-    min-width: 20px;
-    text-align: center;
-    font-weight: 700;
+.quantity{
+    min-width:20px;
+    text-align:center;
+    font-weight:700;
 }
 
-.remove-button {
-    margin-top: 5px;
-    padding: 0;
-    border: none;
-    background: transparent;
-    color: #ff3b30;
-    font-size: 12px;
-    cursor: pointer;
+.remove-button{
+    margin-top:5px;
+    padding:0;
+    border:none;
+    background:transparent;
+    color:#ff3b30;
+    font-size:12px;
+    cursor:pointer;
 }
 
-.cart-summary {
-    background: white;
-    border-radius: 17px;
-    padding: 18px;
-    margin-top: 16px;
+.cart-summary,
+.form-card{
+    background:#fff;
+    border-radius:17px;
+    padding:18px;
+    margin-top:16px;
 }
 
-.summary-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    margin: 9px 0;
-    color: #555555;
+.summary-total{
+    border-top:1px solid #ddd;
+    padding-top:14px;
+    margin-top:14px;
+    font-size:20px;
+    font-weight:800;
+    color:#111;
 }
 
-.summary-total {
-    border-top: 1px solid #dddddd;
-    padding-top: 14px;
-    margin-top: 14px;
-    font-size: 20px;
-    font-weight: 800;
-    color: #111111;
-}
-
-.checkout-button,
-.pay-button {
-    width: 100%;
-    padding: 15px;
-    margin-top: 14px;
-    border: none;
-    border-radius: 11px;
-    background: #111111;
-    color: white;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.empty-cart {
-    background: white;
-    border-radius: 17px;
-    padding: 50px 20px;
-    text-align: center;
-    color: #777777;
+.empty-cart{
+    background:#fff;
+    border-radius:17px;
+    padding:50px 20px;
+    text-align:center;
+    color:#777;
 }
 
 /* CHECKOUT */
 
-.form-card {
-    background: white;
-    border-radius: 17px;
-    padding: 18px;
-    margin-bottom: 14px;
+.form-card h3{
+    margin:0 0 13px;
+    font-size:18px;
 }
 
-.form-card h3 {
-    margin: 0 0 13px;
-    font-size: 18px;
+.input{
+    width:100%;
+    padding:13px;
+    margin:6px 0;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
+    outline:none;
 }
 
-.input {
-    width: 100%;
-    padding: 13px;
-    margin: 6px 0;
-    border: 1px solid #dddddd;
-    border-radius: 10px;
-    font-size: 16px;
-    outline: none;
+.payment-option{
+    border:2px solid #e5e5e5;
+    border-radius:12px;
+    padding:14px;
+    margin:9px 0;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    cursor:pointer;
 }
 
-.input:focus {
-    border-color: #111111;
+.payment-option.selected{
+    border-color:#111;
+    background:#f7f7f7;
 }
 
-.payment-option {
-    border: 2px solid #e5e5e5;
-    border-radius: 12px;
-    padding: 14px;
-    margin: 9px 0;
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    cursor: pointer;
+.payment-option input{
+    width:18px;
+    height:18px;
 }
 
-.payment-option.selected {
-    border-color: #111111;
-    background: #f7f7f7;
+.payment-option strong{
+    display:block;
+    margin-bottom:3px;
 }
 
-.payment-option input {
-    width: 18px;
-    height: 18px;
+.payment-option div div{
+    color:#777;
+    font-size:13px;
 }
 
-.payment-option strong {
-    display: block;
-    margin-bottom: 3px;
+/* WEIGHT VERIFICATION */
+
+.weight-card{
+    background:#fff;
+    border-radius:17px;
+    padding:18px;
+    margin-top:14px;
+    border:2px solid #e5e5e5;
 }
 
-.payment-option div div {
-    color: #777777;
-    font-size: 13px;
+.weight-title{
+    font-size:18px;
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.weight-row{
+    display:flex;
+    justify-content:space-between;
+    margin:8px 0;
+    color:#555;
+}
+
+.weight-row strong{
+    color:#111;
+}
+
+.weight-status{
+    margin-top:14px;
+    padding:13px;
+    border-radius:11px;
+    font-weight:700;
+    text-align:center;
+}
+
+.weight-status.checking{
+    background:#f1f1f1;
+    color:#555;
+}
+
+.weight-status.success{
+    background:#dff8e9;
+    color:#159447;
+}
+
+.weight-status.warning{
+    background:#fff0e0;
+    color:#c65b00;
+}
+
+.weight-status.error{
+    background:#ffe4e2;
+    color:#d93025;
+}
+
+.weight-warning{
+    margin-top:10px;
+    padding:14px;
+    border-radius:11px;
+    background:#fff0e0;
+    color:#a94b00;
+    font-size:14px;
+    line-height:1.4;
+    display:none;
+}
+
+.payment-locked{
+    opacity:.5;
+    pointer-events:none;
 }
 
 /* BILL */
 
-.success-card {
-    background: white;
-    border-radius: 19px;
-    padding: 28px 18px;
-    text-align: center;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+.success-card{
+    background:#fff;
+    border-radius:19px;
+    padding:28px 18px;
+    text-align:center;
+    box-shadow:0 4px 18px rgba(0,0,0,.06);
 }
 
-.success-icon {
-    width: 62px;
-    height: 62px;
-    margin: auto auto 14px;
-    border-radius: 50%;
-    background: #dff8e9;
-    color: #159447;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 29px;
-    font-weight: 700;
+.success-icon{
+    width:62px;
+    height:62px;
+    margin:auto auto 14px;
+    border-radius:50%;
+    background:#dff8e9;
+    color:#159447;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
+    font-weight:700;
 }
 
-.bill {
-    text-align: left;
-    margin-top: 22px;
-    border-top: 1px dashed #bbbbbb;
-    padding-top: 18px;
+.bill{
+    text-align:left;
+    margin-top:22px;
+    border-top:1px dashed #bbb;
+    padding-top:18px;
 }
 
-.bill-item {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    margin: 9px 0;
+.bill-item{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin:9px 0;
 }
 
-.bill-total {
-    border-top: 1px solid #dddddd;
-    margin-top: 14px;
-    padding-top: 14px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 19px;
-    font-weight: 800;
+.bill-total{
+    border-top:1px solid #ddd;
+    margin-top:14px;
+    padding-top:14px;
+    display:flex;
+    justify-content:space-between;
+    font-size:19px;
+    font-weight:800;
 }
 
 .print-button,
-.new-order-button {
-    width: 100%;
-    padding: 14px;
-    border-radius: 11px;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
+.new-order-button{
+    width:100%;
+    padding:14px;
+    border-radius:11px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
 }
 
-.print-button {
-    margin-top: 18px;
-    border: none;
-    background: #111111;
-    color: white;
+.print-button{
+    margin-top:18px;
+    border:none;
+    background:#111;
+    color:#fff;
 }
 
-.new-order-button {
-    margin-top: 9px;
-    border: 1px solid #dddddd;
-    background: white;
-    color: #111111;
+.new-order-button{
+    margin-top:9px;
+    border:1px solid #ddd;
+    background:#fff;
+    color:#111;
 }
 
-/* MOBILE */
-
-@media (max-width: 420px) {
-
-    main {
-        padding-left: 12px;
-        padding-right: 12px;
+@media(max-width:420px){
+    main{
+        padding-left:12px;
+        padding-right:12px;
     }
 
-    .page-title {
-        font-size: 26px;
+    .page-title{
+        font-size:26px;
     }
 
-    #scanner-container {
-        height: 205px;
+    #scanner-container{
+        height:205px;
     }
 
-    .cart-item {
-        padding: 12px;
-        gap: 8px;
-    }
-
-    .cart-item > strong {
-        font-size: 14px;
+    .cart-item{
+        padding:12px;
+        gap:8px;
     }
 }
 
-/* PRINT */
-
-@media print {
-
-    body {
-        background: white;
-    }
+@media print{
+    body{background:#fff}
 
     header,
-    .no-print {
-        display: none !important;
+    .no-print{
+        display:none!important;
     }
 
-    main {
-        max-width: none;
-        padding: 0;
+    main{
+        max-width:none;
+        padding:0;
     }
 
-    .screen {
-        display: none !important;
+    .screen{
+        display:none!important;
     }
 
-    #bill-screen {
-        display: block !important;
+    #bill-screen{
+        display:block!important;
     }
 
-    .success-card {
-        box-shadow: none;
+    .success-card{
+        box-shadow:none;
     }
 }
 </style>
 </head>
 
-
 <body>
 
 <header>
-
-    <div class="logo">
-        SmartCart
-    </div>
+    <div class="logo">SmartCart</div>
 
     <button
         class="cart-button"
@@ -510,26 +517,15 @@ main {
         aria-label="Open cart"
     >
         🛒
-
-        <span
-            class="cart-count"
-            id="cartCount"
-        >0</span>
-
+        <span class="cart-count" id="cartCount">0</span>
     </button>
-
 </header>
-
 
 <main>
 
-
 <!-- SCAN SCREEN -->
 
-<section
-    id="scan-screen"
-    class="screen active"
->
+<section id="scan-screen" class="screen active">
 
     <div class="page-title">
         Smart Shopping
@@ -538,7 +534,6 @@ main {
     <div class="page-subtitle">
         Scan products and add them to your cart
     </div>
-
 
     <div class="scanner-card">
 
@@ -555,14 +550,12 @@ main {
 
         </div>
 
-
         <div
             class="scanner-status"
             id="status"
         >
             Starting camera...
         </div>
-
 
         <button
             class="scanner-button"
@@ -573,7 +566,6 @@ main {
         </button>
 
     </div>
-
 
     <div
         class="product-card"
@@ -586,28 +578,15 @@ main {
             id="productName"
         ></div>
 
-
         <div class="product-info">
-
             <span>Price</span>
-
-            <strong>
-                ₹<span id="productPrice"></span>
-            </strong>
-
+            <strong>₹<span id="productPrice"></span></strong>
         </div>
-
 
         <div class="product-info">
-
             <span>Weight</span>
-
-            <strong>
-                <span id="productWeight"></span> g
-            </strong>
-
+            <strong><span id="productWeight"></span> g</strong>
         </div>
-
 
         <button
             class="add-button"
@@ -623,10 +602,7 @@ main {
 
 <!-- CART SCREEN -->
 
-<section
-    id="cart-screen"
-    class="screen"
->
+<section id="cart-screen" class="screen">
 
     <div class="page-title">
         Your Cart
@@ -636,9 +612,7 @@ main {
         Review your items before checkout
     </div>
 
-
     <div id="cartItems"></div>
-
 
     <div
         class="cart-summary"
@@ -646,48 +620,24 @@ main {
     >
 
         <div class="summary-row">
-
             <span>Items</span>
-
-            <strong id="summaryItems">
-                0
-            </strong>
-
+            <strong id="summaryItems">0</strong>
         </div>
 
-
         <div class="summary-row">
-
             <span>Subtotal</span>
-
-            <strong>
-                ₹<span id="summarySubtotal">0</span>
-            </strong>
-
+            <strong>₹<span id="summarySubtotal">0</span></strong>
         </div>
-
 
         <div class="summary-row">
-
             <span>Tax</span>
-
-            <strong>
-                ₹<span id="summaryTax">0</span>
-            </strong>
-
+            <strong>₹<span id="summaryTax">0</span></strong>
         </div>
-
 
         <div class="summary-row summary-total">
-
             <span>Total</span>
-
-            <strong>
-                ₹<span id="summaryTotal">0</span>
-            </strong>
-
+            <strong>₹<span id="summaryTotal">0</span></strong>
         </div>
-
 
         <button
             class="checkout-button"
@@ -703,10 +653,7 @@ main {
 
 <!-- CHECKOUT SCREEN -->
 
-<section
-    id="checkout-screen"
-    class="screen"
->
+<section id="checkout-screen" class="screen">
 
     <div class="page-title">
         Checkout
@@ -716,13 +663,9 @@ main {
         Confirm your order
     </div>
 
-
     <div class="form-card">
 
-        <h3>
-            Customer Details
-        </h3>
-
+        <h3>Customer Details</h3>
 
         <input
             class="input"
@@ -730,7 +673,6 @@ main {
             placeholder="Name *"
             autocomplete="name"
         >
-
 
         <input
             class="input"
@@ -745,33 +687,68 @@ main {
 
     <div class="form-card">
 
-        <h3>
-            Order Summary
-        </h3>
-
+        <h3>Order Summary</h3>
 
         <div id="checkoutItems"></div>
 
-
         <div class="summary-row summary-total">
-
             <span>Total</span>
-
-            <strong>
-                ₹<span id="checkoutTotal">0</span>
-            </strong>
-
+            <strong>₹<span id="checkoutTotal">0</span></strong>
         </div>
 
     </div>
 
 
-    <div class="form-card">
+    <!-- WEIGHT VERIFICATION -->
 
-        <h3>
-            Payment Method
-        </h3>
+    <div class="weight-card">
 
+        <div class="weight-title">
+            Cart Weight Verification
+        </div>
+
+        <div class="weight-row">
+            <span>Expected weight</span>
+            <strong>
+                <span id="expectedWeight">0</span> g
+            </strong>
+        </div>
+
+        <div class="weight-row">
+            <span>Actual weight</span>
+            <strong>
+                <span id="actualWeight">--</span> g
+            </strong>
+        </div>
+
+        <div class="weight-row">
+            <span>Allowed tolerance</span>
+            <strong>+50 g</strong>
+        </div>
+
+        <div
+            class="weight-status checking"
+            id="weightStatus"
+        >
+            Checking cart weight...
+        </div>
+
+        <div
+            class="weight-warning"
+            id="weightWarning"
+        ></div>
+
+    </div>
+
+
+    <!-- PAYMENT -->
+
+    <div
+        class="form-card"
+        id="paymentCard"
+    >
+
+        <h3>Payment Method</h3>
 
         <label
             class="payment-option selected"
@@ -786,13 +763,8 @@ main {
             >
 
             <div>
-
                 <strong>UPI</strong>
-
-                <div>
-                    Google Pay / PhonePe / UPI
-                </div>
-
+                <div>Google Pay / PhonePe / UPI</div>
             </div>
 
         </label>
@@ -810,13 +782,8 @@ main {
             >
 
             <div>
-
                 <strong>Card</strong>
-
-                <div>
-                    Credit / Debit Card
-                </div>
-
+                <div>Credit / Debit Card</div>
             </div>
 
         </label>
@@ -834,13 +801,8 @@ main {
             >
 
             <div>
-
                 <strong>Cash</strong>
-
-                <div>
-                    Pay at checkout counter
-                </div>
-
+                <div>Pay at checkout counter</div>
             </div>
 
         </label>
@@ -848,7 +810,9 @@ main {
 
         <button
             class="pay-button"
+            id="payButton"
             onclick="processPayment()"
+            disabled
         >
             Pay ₹<span id="payAmount">0</span>
         </button>
@@ -860,10 +824,7 @@ main {
 
 <!-- BILL SCREEN -->
 
-<section
-    id="bill-screen"
-    class="screen"
->
+<section id="bill-screen" class="screen">
 
     <div class="success-card">
 
@@ -871,66 +832,48 @@ main {
             ✓
         </div>
 
-
-        <h2>
-            Order Confirmed
-        </h2>
-
+        <h2>Order Confirmed</h2>
 
         <p>
             Thank you for shopping with SmartCart.
         </p>
 
-
         <div class="bill">
 
-            <strong>
-                SmartCart
-            </strong>
-
+            <strong>SmartCart</strong>
 
             <p>
                 Order ID:
                 <strong id="orderId"></strong>
             </p>
 
-
             <p>
                 Date:
                 <span id="orderDate"></span>
             </p>
-
 
             <p>
                 Customer:
                 <span id="billCustomer"></span>
             </p>
 
-
             <p>
                 Payment:
                 <span id="billPayment"></span>
             </p>
 
-
             <hr>
-
 
             <div id="billItems"></div>
 
-
             <div class="bill-total">
-
                 <span>Total</span>
-
                 <span>
                     ₹<span id="billTotal">0</span>
                 </span>
-
             </div>
 
         </div>
-
 
         <button
             class="print-button no-print"
@@ -938,7 +881,6 @@ main {
         >
             Print / Save Bill
         </button>
-
 
         <button
             class="new-order-button no-print"
@@ -953,9 +895,7 @@ main {
 
 </main>
 
-
 <script src="https://unpkg.com/@zxing/browser@latest"></script>
-
 
 <script>
 
@@ -963,6 +903,9 @@ let codeReader = null;
 let scanning = false;
 let currentProduct = null;
 let selectedPayment = "upi";
+
+let weightTimer = null;
+let weightVerified = false;
 
 let cart =
     JSON.parse(
@@ -972,7 +915,7 @@ let cart =
 
 /* SCREEN NAVIGATION */
 
-function showScreen(name) {
+function showScreen(name){
 
     document
         .querySelectorAll(".screen")
@@ -980,38 +923,34 @@ function showScreen(name) {
             screen.classList.remove("active");
         });
 
-
     const screen =
         document.getElementById(
             name + "-screen"
         );
 
-
-    if (screen) {
+    if(screen){
         screen.classList.add("active");
     }
 
-
-    if (name === "cart") {
+    if(name === "cart"){
         updateCartUI();
     }
 
-
-    if (name === "checkout") {
+    if(name === "checkout"){
         updateCheckoutUI();
+        startWeightVerification();
     }
 
 }
 
 
-/* CAMERA / BARCODE */
+/* CAMERA */
 
-async function startScanner() {
+async function startScanner(){
 
-    if (scanning) {
+    if(scanning){
         return;
     }
-
 
     const status =
         document.getElementById("status");
@@ -1022,79 +961,66 @@ async function startScanner() {
     const button =
         document.getElementById("scanAgain");
 
-
     status.innerText =
         "Requesting camera...";
 
     button.disabled = true;
 
+    try{
 
-    try {
+        if(codeReader){
 
-        if (codeReader) {
-
-            try {
+            try{
                 codeReader.reset();
-            } catch (e) {}
+            }catch(e){}
 
         }
-
 
         codeReader =
             new ZXingBrowser.BrowserMultiFormatReader();
 
-
         scanning = true;
-
 
         status.innerText =
             "Point the camera at a barcode";
 
-
         await codeReader.decodeFromConstraints(
 
             {
-                video: {
-                    facingMode: {
-                        ideal: "environment"
+                video:{
+                    facingMode:{
+                        ideal:"environment"
                     }
                 },
-                audio: false
+                audio:false
             },
 
             video,
 
-            async (result) => {
+            async(result)=>{
 
-                if (!result) {
+                if(!result){
                     return;
                 }
 
-
                 const barcode =
                     result.getText();
-
 
                 console.log(
                     "Barcode detected:",
                     barcode
                 );
 
-
                 scanning = false;
 
-
-                try {
+                try{
                     codeReader.reset();
-                } catch (e) {}
-
+                }catch(e){}
 
                 status.innerText =
                     "Loading product...";
 
-
                 await getProduct(barcode);
-
 
                 button.disabled = false;
 
@@ -1103,18 +1029,16 @@ async function startScanner() {
 
     }
 
-    catch (error) {
+    catch(error){
 
         console.error(
             "Camera error:",
             error
         );
 
-
         scanning = false;
 
         button.disabled = false;
-
 
         status.innerText =
             "Camera error: " +
@@ -1129,9 +1053,9 @@ async function startScanner() {
 
 /* PRODUCT API */
 
-async function getProduct(barcode) {
+async function getProduct(barcode){
 
-    try {
+    try{
 
         const response =
             await fetch(
@@ -1139,12 +1063,10 @@ async function getProduct(barcode) {
                 encodeURIComponent(barcode)
             );
 
-
         const data =
             await response.json();
 
-
-        if (!response.ok) {
+        if(!response.ok){
 
             document.getElementById(
                 "status"
@@ -1152,36 +1074,29 @@ async function getProduct(barcode) {
                 "Product not found";
 
             return;
-
         }
 
-
         currentProduct = data;
-
 
         document.getElementById(
             "productName"
         ).innerText =
             data.name;
 
-
         document.getElementById(
             "productPrice"
         ).innerText =
             data.price;
-
 
         document.getElementById(
             "productWeight"
         ).innerText =
             data.weight;
 
-
         document.getElementById(
             "product"
         ).style.display =
             "block";
-
 
         document.getElementById(
             "status"
@@ -1190,10 +1105,9 @@ async function getProduct(barcode) {
 
     }
 
-    catch (error) {
+    catch(error){
 
         console.error(error);
-
 
         document.getElementById(
             "status"
@@ -1207,12 +1121,11 @@ async function getProduct(barcode) {
 
 /* ADD PRODUCT */
 
-function addCurrentProduct() {
+function addCurrentProduct(){
 
-    if (!currentProduct) {
+    if(!currentProduct){
         return;
     }
-
 
     const existing =
         cart.find(
@@ -1221,14 +1134,13 @@ function addCurrentProduct() {
                 currentProduct.barcode
         );
 
-
-    if (existing) {
+    if(existing){
 
         existing.quantity += 1;
 
     }
 
-    else {
+    else{
 
         cart.push({
 
@@ -1244,32 +1156,26 @@ function addCurrentProduct() {
             weight:
                 currentProduct.weight,
 
-            quantity: 1
+            quantity:1
 
         });
 
     }
 
-
     saveCart();
-
     updateCartCount();
-
 
     document.getElementById(
         "product"
     ).style.display =
         "none";
 
-
     document.getElementById(
         "status"
     ).innerText =
         "Added to cart";
 
-
     currentProduct = null;
-
 
     setTimeout(
         startScanner,
@@ -1281,7 +1187,7 @@ function addCurrentProduct() {
 
 /* CART STORAGE */
 
-function saveCart() {
+function saveCart(){
 
     localStorage.setItem(
         "smartcart",
@@ -1293,15 +1199,14 @@ function saveCart() {
 
 /* CART COUNT */
 
-function updateCartCount() {
+function updateCartCount(){
 
     const count =
         cart.reduce(
-            (total, item) =>
+            (total,item) =>
                 total + item.quantity,
             0
         );
-
 
     document.getElementById(
         "cartCount"
@@ -1313,7 +1218,7 @@ function updateCartCount() {
 
 /* CART UI */
 
-function updateCartUI() {
+function updateCartUI(){
 
     const container =
         document.getElementById(
@@ -1325,8 +1230,7 @@ function updateCartUI() {
             "cartSummary"
         );
 
-
-    if (cart.length === 0) {
+    if(cart.length === 0){
 
         container.innerHTML = `
             <div class="empty-cart">
@@ -1335,40 +1239,32 @@ function updateCartUI() {
             </div>
         `;
 
-
         summary.style.display =
             "none";
-
 
         return;
 
     }
 
-
     summary.style.display =
         "block";
 
-
     container.innerHTML = "";
 
-
     cart.forEach(
-        (item, index) => {
+        (item,index)=>{
 
             const itemTotal =
                 item.price *
                 item.quantity;
-
 
             const div =
                 document.createElement(
                     "div"
                 );
 
-
             div.className =
                 "cart-item";
-
 
             div.innerHTML = `
 
@@ -1391,11 +1287,10 @@ function updateCartUI() {
 
                 </div>
 
-
                 <div class="quantity-control">
 
                     <button
-                        onclick="changeQuantity(${index}, -1)"
+                        onclick="changeQuantity(${index},-1)"
                     >
                         −
                     </button>
@@ -1405,26 +1300,22 @@ function updateCartUI() {
                     </span>
 
                     <button
-                        onclick="changeQuantity(${index}, 1)"
+                        onclick="changeQuantity(${index},1)"
                     >
                         +
                     </button>
 
                 </div>
 
-
                 <strong>
                     ₹${itemTotal}
                 </strong>
-
             `;
-
 
             container.appendChild(div);
 
         }
     );
-
 
     calculateTotals();
 
@@ -1433,20 +1324,16 @@ function updateCartUI() {
 
 /* QUANTITY */
 
-function changeQuantity(index, change) {
+function changeQuantity(index,change){
 
     cart[index].quantity += change;
 
-
-    if (cart[index].quantity <= 0) {
-        cart.splice(index, 1);
+    if(cart[index].quantity <= 0){
+        cart.splice(index,1);
     }
 
-
     saveCart();
-
     updateCartCount();
-
     updateCartUI();
 
 }
@@ -1454,15 +1341,12 @@ function changeQuantity(index, change) {
 
 /* REMOVE */
 
-function removeItem(index) {
+function removeItem(index){
 
-    cart.splice(index, 1);
-
+    cart.splice(index,1);
 
     saveCart();
-
     updateCartCount();
-
     updateCartUI();
 
 }
@@ -1470,13 +1354,12 @@ function removeItem(index) {
 
 /* TOTALS */
 
-function calculateTotals() {
+function calculateTotals(){
 
     let items = 0;
     let subtotal = 0;
 
-
-    cart.forEach(item => {
+    cart.forEach(item=>{
 
         items += item.quantity;
 
@@ -1486,42 +1369,35 @@ function calculateTotals() {
 
     });
 
-
     const tax =
         Math.round(
             subtotal * 0.05
         );
 
-
     const total =
         subtotal + tax;
-
 
     document.getElementById(
         "summaryItems"
     ).innerText =
         items;
 
-
     document.getElementById(
         "summarySubtotal"
     ).innerText =
         subtotal;
-
 
     document.getElementById(
         "summaryTax"
     ).innerText =
         tax;
 
-
     document.getElementById(
         "summaryTotal"
     ).innerText =
         total;
 
-
-    return {
+    return{
         items,
         subtotal,
         tax,
@@ -1533,40 +1409,35 @@ function calculateTotals() {
 
 /* CHECKOUT */
 
-function goToCheckout() {
+function goToCheckout(){
 
-    if (cart.length === 0) {
+    if(cart.length === 0){
         return;
     }
-
 
     showScreen("checkout");
 
 }
 
 
-function updateCheckoutUI() {
+function updateCheckoutUI(){
 
     const container =
         document.getElementById(
             "checkoutItems"
         );
 
-
     container.innerHTML = "";
 
-
-    cart.forEach(item => {
+    cart.forEach(item=>{
 
         const div =
             document.createElement(
                 "div"
             );
 
-
         div.className =
             "summary-row";
-
 
         div.innerHTML = `
 
@@ -1578,29 +1449,253 @@ function updateCheckoutUI() {
             <strong>
                 ₹${item.price * item.quantity}
             </strong>
-
         `;
-
 
         container.appendChild(div);
 
     });
 
-
     const totals =
         calculateTotals();
-
 
     document.getElementById(
         "checkoutTotal"
     ).innerText =
         totals.total;
 
-
     document.getElementById(
         "payAmount"
     ).innerText =
         totals.total;
+
+    calculateExpectedWeight();
+
+}
+
+
+/* EXPECTED WEIGHT */
+
+function calculateExpectedWeight(){
+
+    let expected = 0;
+
+    cart.forEach(item=>{
+
+        expected +=
+            Number(item.weight) *
+            Number(item.quantity);
+
+    });
+
+    document.getElementById(
+        "expectedWeight"
+    ).innerText =
+        expected;
+
+    return expected;
+
+}
+
+
+/* WEIGHT VERIFICATION */
+
+function startWeightVerification(){
+
+    if(weightTimer){
+        clearInterval(weightTimer);
+    }
+
+    weightVerified = false;
+
+    setPaymentLocked(true);
+
+    checkWeight();
+
+    weightTimer =
+        setInterval(
+            checkWeight,
+            1500
+        );
+
+}
+
+
+async function checkWeight(){
+
+    if(cart.length === 0){
+        return;
+    }
+
+    const expectedWeight =
+        calculateExpectedWeight();
+
+    try{
+
+        const response =
+            await fetch(
+                "/api/weight"
+            );
+
+        const data =
+            await response.json();
+
+        const actualWeight =
+            Number(data.weight);
+
+        document.getElementById(
+            "actualWeight"
+        ).innerText =
+            actualWeight;
+
+        const status =
+            document.getElementById(
+                "weightStatus"
+            );
+
+        const warning =
+            document.getElementById(
+                "weightWarning"
+            );
+
+        const allowedWeight =
+            expectedWeight + 50;
+
+
+        /*
+         * WEIGHT PASSED
+         *
+         * Actual weight can be equal to
+         * expected weight or up to 50 g higher.
+         */
+
+        if(actualWeight <= allowedWeight){
+
+            weightVerified = true;
+
+            status.className =
+                "weight-status success";
+
+            status.innerText =
+                "✓ Weight verified";
+
+            warning.style.display =
+                "none";
+
+            setPaymentLocked(false);
+
+        }
+
+
+        /*
+         * EXTRA ITEM
+         */
+
+        else{
+
+            weightVerified = false;
+
+            status.className =
+                "weight-status warning";
+
+            status.innerText =
+                "⚠ Extra item detected";
+
+            warning.style.display =
+                "block";
+
+            warning.innerHTML =
+                "<strong>Extra item detected.</strong><br>" +
+                "Expected: " +
+                expectedWeight +
+                " g<br>" +
+                "Actual: " +
+                actualWeight +
+                " g<br><br>" +
+                "Please remove the extra item from your cart and place the cart back on the weighing area.";
+
+            setPaymentLocked(true);
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Weight check error:",
+            error
+        );
+
+        weightVerified = false;
+
+        document.getElementById(
+            "actualWeight"
+        ).innerText =
+            "--";
+
+        const status =
+            document.getElementById(
+                "weightStatus"
+            );
+
+        status.className =
+            "weight-status error";
+
+        status.innerText =
+            "⚠ Weight sensor unavailable";
+
+        const warning =
+            document.getElementById(
+                "weightWarning"
+            );
+
+        warning.style.display =
+            "block";
+
+        warning.innerHTML =
+            "<strong>Unable to verify cart weight.</strong><br>" +
+            "Please make sure the weighing system is connected.";
+
+        setPaymentLocked(true);
+
+    }
+
+}
+
+
+/* LOCK / UNLOCK PAYMENT */
+
+function setPaymentLocked(locked){
+
+    const paymentCard =
+        document.getElementById(
+            "paymentCard"
+        );
+
+    const payButton =
+        document.getElementById(
+            "payButton"
+        );
+
+    if(locked){
+
+        paymentCard.classList.add(
+            "payment-locked"
+        );
+
+        payButton.disabled = true;
+
+    }
+
+    else{
+
+        paymentCard.classList.remove(
+            "payment-locked"
+        );
+
+        payButton.disabled = false;
+
+    }
 
 }
 
@@ -1610,24 +1705,24 @@ function updateCheckoutUI() {
 function selectPayment(
     method,
     element
-) {
+){
+
+    if(!weightVerified){
+        return;
+    }
 
     selectedPayment =
         method;
-
 
     document
         .querySelectorAll(
             ".payment-option"
         )
-        .forEach(option => {
-
+        .forEach(option=>{
             option.classList.remove(
                 "selected"
             );
-
         });
-
 
     element.classList.add(
         "selected"
@@ -1638,60 +1733,58 @@ function selectPayment(
 
 /* PROCESS PAYMENT */
 
-function processPayment() {
+function processPayment(){
 
-    if (cart.length === 0) {
+    if(cart.length === 0){
         return;
     }
 
+    if(!weightVerified){
+
+        alert(
+            "Please complete weight verification before payment."
+        );
+
+        return;
+    }
 
     const name =
         document.getElementById(
             "customerName"
         ).value.trim();
 
-
-    /*
-        NAME IS REQUIRED.
-        PHONE IS OPTIONAL.
-    */
-
-    if (!name) {
+    if(!name){
 
         alert(
             "Please enter your name."
         );
 
         return;
-
     }
-
 
     const totals =
         calculateTotals();
 
-
     const button =
-        document.querySelector(
-            ".pay-button"
+        document.getElementById(
+            "payButton"
         );
 
-
     button.disabled = true;
-
 
     button.innerText =
         "Processing payment...";
 
+    if(weightTimer){
+        clearInterval(weightTimer);
+    }
 
     setTimeout(
-        () => {
-
+        ()=>{
             createOrder(
                 name,
                 totals
             );
-
         },
         1200
     );
@@ -1704,7 +1797,7 @@ function processPayment() {
 function createOrder(
     name,
     totals
-) {
+){
 
     const orderId =
         "SC" +
@@ -1712,61 +1805,50 @@ function createOrder(
             .toString()
             .slice(-8);
 
-
     const date =
         new Date();
-
 
     document.getElementById(
         "orderId"
     ).innerText =
         orderId;
 
-
     document.getElementById(
         "orderDate"
     ).innerText =
         date.toLocaleString();
-
 
     document.getElementById(
         "billCustomer"
     ).innerText =
         name;
 
-
     document.getElementById(
         "billPayment"
     ).innerText =
         selectedPayment.toUpperCase();
-
 
     document.getElementById(
         "billTotal"
     ).innerText =
         totals.total;
 
-
     const billItems =
         document.getElementById(
             "billItems"
         );
 
-
     billItems.innerHTML = "";
 
-
-    cart.forEach(item => {
+    cart.forEach(item=>{
 
         const div =
             document.createElement(
                 "div"
             );
 
-
         div.className =
             "bill-item";
-
 
         div.innerHTML = `
 
@@ -1778,23 +1860,17 @@ function createOrder(
             <strong>
                 ₹${item.price * item.quantity}
             </strong>
-
         `;
-
 
         billItems.appendChild(div);
 
     });
 
-
     showScreen("bill");
-
 
     cart = [];
 
-
     saveCart();
-
     updateCartCount();
 
 }
@@ -1802,35 +1878,29 @@ function createOrder(
 
 /* NEW ORDER */
 
-function newOrder() {
+function newOrder(){
 
     currentProduct = null;
+    weightVerified = false;
 
+    if(weightTimer){
+        clearInterval(weightTimer);
+    }
 
     document.getElementById(
         "product"
     ).style.display =
         "none";
 
+    document.getElementById(
+        "customerName"
+    ).value = "";
 
-    const nameInput =
-        document.getElementById(
-            "customerName"
-        );
-
-
-    const phoneInput =
-        document.getElementById(
-            "customerPhone"
-        );
-
-
-    nameInput.value = "";
-    phoneInput.value = "";
-
+    document.getElementById(
+        "customerPhone"
+    ).value = "";
 
     showScreen("scan");
-
 
     setTimeout(
         startScanner,
@@ -1842,17 +1912,15 @@ function newOrder() {
 
 /* HTML ESCAPE */
 
-function escapeHTML(text) {
+function escapeHTML(text){
 
     const div =
         document.createElement(
             "div"
         );
 
-
     div.textContent =
         text;
-
 
     return div.innerHTML;
 
@@ -1862,7 +1930,6 @@ function escapeHTML(text) {
 /* STARTUP */
 
 updateCartCount();
-
 
 window.addEventListener(
     "load",
