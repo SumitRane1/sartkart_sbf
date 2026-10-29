@@ -17,19 +17,34 @@
         }
 
         h1 {
-            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        #scanner {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
         }
 
         video {
             width: 100%;
-            max-width: 500px;
-            margin-top: 20px;
+            display: block;
             border-radius: 12px;
             background: black;
         }
 
+        .scan-box {
+            position: absolute;
+            top: 40%;
+            left: 10%;
+            width: 80%;
+            height: 20%;
+            border: 3px solid #00ff66;
+            box-sizing: border-box;
+        }
+
         button {
-            margin-top: 20px;
             padding: 14px 25px;
             font-size: 18px;
             border: none;
@@ -43,7 +58,7 @@
 
         #result {
             margin-top: 20px;
-            padding: 15px;
+            padding: 18px;
             background: #222;
             border-radius: 10px;
             font-size: 24px;
@@ -57,9 +72,10 @@
     <h1>SmartCart</h1>
     <p>Barcode Scanner Test</p>
 
-    <video id="camera" autoplay playsinline></video>
-
-    <br>
+    <div id="scanner">
+        <video id="camera" autoplay playsinline></video>
+        <div class="scan-box"></div>
+    </div>
 
     <button onclick="startScanner()">
         Start Scanner
@@ -73,72 +89,68 @@
         No barcode detected
     </div>
 
-
-    <!-- ZXing barcode library -->
     <script src="https://unpkg.com/@zxing/browser@latest"></script>
 
     <script>
 
-        let codeReader;
+        let reader;
 
         async function startScanner() {
 
             const video = document.getElementById("camera");
             const status = document.getElementById("status");
-            const result = document.getElementById("result");
+            const resultBox = document.getElementById("result");
 
             status.textContent = "Starting camera...";
 
             try {
 
-                codeReader = new ZXingBrowser.BrowserMultiFormatReader();
+                reader = new ZXingBrowser.BrowserMultiFormatReader();
 
                 const devices =
                     await ZXingBrowser.BrowserCodeReader.listVideoInputDevices();
 
-                if (devices.length === 0) {
+                console.log("Cameras:", devices);
+
+                if (!devices.length) {
                     throw new Error("No camera found");
                 }
 
-                // Try to use the rear camera
-                let selectedDevice = devices[devices.length - 1];
+                // Prefer rear camera
+                let cameraId = devices[devices.length - 1].deviceId;
 
                 for (const device of devices) {
 
-                    const label = device.label.toLowerCase();
+                    const label = (device.label || "").toLowerCase();
 
                     if (
                         label.includes("back") ||
                         label.includes("rear") ||
                         label.includes("environment")
                     ) {
-                        selectedDevice = device;
+                        cameraId = device.deviceId;
                         break;
                     }
                 }
 
                 status.textContent = "Scanning...";
 
-                codeReader.decodeFromVideoDevice(
-                    selectedDevice.deviceId,
+                await reader.decodeFromVideoDevice(
+                    cameraId,
                     video,
-                    (resultData, error) => {
+                    (result, error) => {
 
-                        if (resultData) {
+                        if (result) {
 
-                            const barcode =
-                                resultData.getText();
+                            const code = result.getText();
 
-                            result.textContent =
-                                "Barcode: " + barcode;
+                            resultBox.textContent =
+                                "Barcode: " + code;
 
                             status.textContent =
                                 "Barcode detected ✅";
 
-                            console.log(
-                                "Barcode:",
-                                barcode
-                            );
+                            console.log("DETECTED:", code);
                         }
 
                     }
@@ -149,7 +161,7 @@
                 console.error(error);
 
                 status.textContent =
-                    "Scanner error ❌ " + error.message;
+                    "Error: " + error.message;
             }
         }
 
