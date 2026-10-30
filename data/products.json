@@ -16,5 +16,11 @@
     "name": "Chips",
     "price": 10,
     "weight": 71
+  },
+  {
+    "barcode": "8811882639064",
+    "name": "Maggi",
+    "price": 140,
+    "weight": 145
   }
 ]
