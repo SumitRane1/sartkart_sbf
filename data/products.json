@@ -3,11 +3,10 @@
     "barcode": "7143265017727",
     "name": "Marie Gold",
     "price": 10,
-    "weight": 180
+    "weight": 90
   },
   {
     "barcode": "6161235907107",
-    "name": "Sprite",
     "price": 20,
     "weight": 210
   },
